@@ -82,46 +82,33 @@ import request from "@/utils/request";
 export default {
   name: 'User',
   data() {
-    const checkNums = (rule, value, callback) => {
-      value = parseInt(value)
-      if (value < 10 || value > 200) {
-        callback(new Error('请输入大于等于10小于或等于200的整数'));
-      }
-      callback()
-    };
+
     return {
       tableData: [],
       total: 0,
       params: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 3,
         name: '',
         phone: ''
       },
-      dialogFormVisible: false,
+
       form: {},
-      rules: {
-        score: [
-          { required: true, message: '请输入积分', trigger: 'blur'},
-          { validator: checkNums, trigger: 'blur'}
-        ]
-      }
+
     }
   },
+
+  handleCurrentChange(pageNum) {
+    // 点击分页按钮触发分页
+    this.params.pageNum = pageNum
+    this.load()
+  },
+
   created() {
     this.load()
   },
   methods: {
-    changeStatus(row) {
-      request.put('/user/update', row).then(res => {
-        if (res.code === '200') {
-          this.$notify.success('操作成功')
-          this.load()
-        } else {
-          this.$notify.error(res.msg)
-        }
-      })
-    },
+
     load() {
       // fetch('http://localhost:9090/user/list').then(res => res.json()).then(res => {
       //   console.log(res)
@@ -137,50 +124,19 @@ export default {
         }
       })
     },
-    reset() {
+
+    reset(){
       this.params = {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 3,
         name: '',
         phone: ''
       }
-      this.load()
-    },
-    handleCurrentChange(pageNum) {
-      // 点击分页按钮触发分页
-      this.params.pageNum = pageNum
-      this.load()
-    },
-    del(id) {
-      request.delete("/user/delete/" + id).then(res => {
-        if (res.code === '200') {
-          this.$notify.success('删除成功')
-          this.load()
-        } else {
-          this.$notify.error(res.msg)
-        }
-      })
-    },
-    handleAccountAdd(row) {
-      this.form = JSON.parse(JSON.stringify(row))
-      this.dialogFormVisible = true
-    },
-    addAccount() {
-      this.$refs['ruleForm'].validate((valid) => {
-        if (valid) {
-          request.post('/user/account', this.form).then(res => {
-            if (res.code === '200') {
-              this.$notify.success('充值成功')
-              this.dialogFormVisible = false
-              this.load()
-            } else {
-              this.$notify.error(res.msg)
-            }
-          })
-        }
-      })
+      this.load()//重置完信息也需要重新加载
     }
   }
+
+
 }
 </script>
 

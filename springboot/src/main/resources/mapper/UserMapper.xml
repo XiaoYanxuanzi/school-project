@@ -21,4 +21,9 @@
         order by id desc
 
     </select>
+
+    <insert id="save">
+        INSERT INTO `user`(`username`, `password`, `name`, `age`, `birth`, `account`, `phone`, `email`, `role`)
+        VALUES (#{username}, #{password}, #{name}, #{age}, #{birth}, #{account}, #{phone}, #{email}, #{role});
+    </insert>
 </mapper>

@@ -18,11 +18,11 @@ public class UserService implements IUserService {
     @Autowired
     private UserMapper userMapper;
 
-    @Override
-    public List<User> listusers() {
-
-        return userMapper.listUsers();
-    }
+//    @Override
+//    public List<User> listusers() {
+//
+//        return userMapper.listUsers();
+//    }
 
     @Override
     public PageInfo<User> page(UserPageRequest userPageRequest) {

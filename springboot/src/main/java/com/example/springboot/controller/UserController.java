@@ -20,18 +20,18 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    /**
-     * 查询用户列表
-     * @return
-     */
-    @GetMapping("/list")
-    public Result listUsers(){
-        List<User> users = userService.listusers();
-        return Result.success(users);
-    }
+//    /**
+//     * 查询用户列表
+//     * @return
+//     */
+//    @GetMapping("/list")
+//    public Result listUsers(){
+//        List<User> users = userService.listusers();
+//        return Result.success(users);
+//    }
 
     /**
-     * 查询用户列表
+     * 分页查询
      * @return
      */
     @GetMapping("/pages")

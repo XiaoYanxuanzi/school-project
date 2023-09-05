@@ -140,7 +140,7 @@ export default {
       })
     },
     load() {
-      request.get('/admin/page', {
+      request.get('/admin/pages', {
         params: this.params
       }).then(res => {
         if (res.code === '200') {

@@ -1,5 +1,6 @@
 package com.example.springboot.mapper;
 
+import com.example.springboot.controller.request.BaseRequest;
 import com.example.springboot.domain.Admin;
 import com.example.springboot.domain.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,6 +16,8 @@ import java.util.List;
 @Mapper
 public interface AdminMapper {
 
-    List<Admin> listAdmins();
+//    List<Admin> listAdmins();
+
+    List<Admin> listByCondition(BaseRequest baseRequest);
 
 }

@@ -2,10 +2,10 @@
   <div>
     <el-card style="margin: 20px 0; font-size: 18px">
       <div style="margin-bottom: 10px">
-        B站关注：程序员青戈，手把手带你做毕设！
+        详细文档链接：https://github.com/XiaoYanxuanzi/library-master
       </div>
      <div style="margin: 10px">
-       毕设、课设项目定制加up微信：xia_qing2012。代码纯手撸，安全靠谱！
+        联系作者Vx：Chen13790685352
      </div>
     </el-card>
     <div style="margin: 20px 0">

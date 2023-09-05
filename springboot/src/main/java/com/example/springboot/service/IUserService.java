@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface IUserService {
 
-    List<User> listusers();
+//    List<User> listusers();
 
     PageInfo<User> page(UserPageRequest userPageRequest);
 }

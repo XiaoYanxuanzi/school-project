@@ -17,7 +17,9 @@ import java.util.List;
 public interface UserMapper {
 
 //    @Select("select  * from user")
-    List<User> listUsers();
+//    List<User> listUsers();
 
     List<User> listByCondition(BaseRequest baseRequest);
+
+    void save(User user);
 }
