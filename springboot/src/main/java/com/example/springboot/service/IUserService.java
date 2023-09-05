@@ -14,4 +14,12 @@ public interface IUserService {
 //    List<User> listusers();
 
     PageInfo<User> page(UserPageRequest userPageRequest);
+
+    void save(User user);
+
+    void deleteById(Integer id);
+
+    void update(User user);
+
+    User getById(Integer id);
 }

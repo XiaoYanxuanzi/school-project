@@ -23,7 +23,20 @@
     </select>
 
     <insert id="save">
-        INSERT INTO `user`(`username`, `password`, `name`, `age`, `birth`, `account`, `phone`, `email`, `role`)
-        VALUES (#{username}, #{password}, #{name}, #{age}, #{birth}, #{account}, #{phone}, #{email}, #{role});
+        insert into user(name, username, age, sex, phone, address, account)
+        values(#{name}, #{username}, #{age}, #{sex}, #{phone}, #{address}, #{account})
     </insert>
+
+    <delete id="deleteById">
+        delete from user where id = #{id}
+    </delete>
+
+    <update id="updateById">
+        update user set name = #{name}, age = #{age}, sex = #{sex}, phone = #{phone}, address = #{address},
+                        updatetime = #{updatetime} where id = #{id}
+    </update>
+
+    <select id="getById" resultType="com.example.springboot.domain.User">
+        select * from user where id = #{id}
+    </select>
 </mapper>

@@ -67,17 +67,12 @@ export default {
   },
   methods: {
     save() {
-      this.$refs['ruleForm'].validate((valid) => {
-        if (valid) {
           request.post('/user/save', this.form).then(res => {
             if (res.code === '200') {
               this.$notify.success('新增成功')
-              this.$refs['ruleForm'].resetFields()
             } else {
               this.$notify.error(res.msg)
             }
-          })
-        }
       })
     }
   }

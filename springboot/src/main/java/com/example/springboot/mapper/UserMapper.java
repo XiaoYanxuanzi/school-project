@@ -22,4 +22,10 @@ public interface UserMapper {
     List<User> listByCondition(BaseRequest baseRequest);
 
     void save(User user);
+
+    void deleteById(Integer id);
+
+    void updateById(User user);
+
+    User getById(Integer id);
 }

@@ -24,12 +24,12 @@
       <div style="width: 200px; min-height: calc(100vh - 62px); overflow: hidden; margin-right: 2px; background-color: white">
         <el-menu :default-active="$route.path" router class="el-menu-demo" style="margin-bottom: 10px">
           <el-menu-item index="/">
-            <i class="el-icon-eleme"></i>
+            <i class="el-i"></i>
             <span>首页</span>
           </el-menu-item>
           <el-submenu index="user">
             <template slot="title">
-              <i class="el-icon-question"></i>
+              <i class="el-icon-hot-water"></i>
               <span>会员管理</span>
             </template>
             <el-menu-item index="/addUser">会员添加</el-menu-item>

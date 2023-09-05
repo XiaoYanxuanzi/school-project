@@ -41,6 +41,7 @@ export default {
   created() {
     const id = this.$route.query.id
     request.get("/user/" + id).then(res => {
+      console.log(res)
       this.form = res.data
     })
   },

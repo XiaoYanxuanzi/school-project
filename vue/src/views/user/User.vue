@@ -133,6 +133,18 @@ export default {
         phone: ''
       }
       this.load()//重置完信息也需要重新加载
+    },
+
+    del(id){
+        request.delete("/user/delete/"+ id).then(res => {
+          console.log(res)
+          if (res.code === '200'){
+            this.$notify.success('操作成功')
+            this.load()
+          }else {
+            this.$notify.error(res.msg)
+          }
+        })
     }
   }
 
