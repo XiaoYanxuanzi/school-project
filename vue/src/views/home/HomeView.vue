@@ -2,10 +2,10 @@
   <div>
     <el-card style="margin: 20px 0; font-size: 18px">
       <div style="margin-bottom: 10px">
-        团队合作链接 https://github.com/XiaoYanxuanzi/admin-master
+        B站关注：程序员青戈，手把手带你做毕设！
       </div>
      <div style="margin: 10px">
-       欢迎您：{{admin}}
+       毕设、课设项目定制加up微信：xia_qing2012。代码纯手撸，安全靠谱！
      </div>
     </el-card>
     <div style="margin: 20px 0">

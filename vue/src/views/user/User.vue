@@ -32,7 +32,7 @@
 
       <el-table-column label="操作" width="230">
         <template v-slot="scope">
-<!--          scope.row 就是当前行数据-->
+          <!--          scope.row 就是当前行数据-->
           <el-button type="warning" @click="handleAccountAdd(scope.row)">充值</el-button>
           <el-button type="primary" @click="$router.push('/editUser?id=' + scope.row.id)">编辑</el-button>
           <el-popconfirm
@@ -109,77 +109,77 @@ export default {
     }
   },
   created() {
-    this.load()//调用load方法 初始化数据
+    this.load()
   },
   methods: {
-    // changeStatus(row) {
-    //   request.put('/user/update', row).then(res => {
-    //     if (res.code === '200') {
-    //       this.$notify.success('操作成功')
-    //       this.load()
-    //     } else {
-    //       this.$notify.error(res.msg)
-    //     }
-    //   })
-    // },
-    load() {
-      fetch('http://localhost:9090/user/list').then(res => res.json()).then(res => {
-        console.log(res)
-        this.tableData = res
+    changeStatus(row) {
+      request.put('/user/update', row).then(res => {
+        if (res.code === '200') {
+          this.$notify.success('操作成功')
+          this.load()
+        } else {
+          this.$notify.error(res.msg)
+        }
       })
-
-      // request.get('/user/page', {
-      //   params: this.params
-      // }).then(res => {
-      //   if (res.code === '200') {
-      //     this.tableData = res.data.list
-      //     this.total = res.data.total
-      //   }
-      // })
     },
-    // reset() {
-    //   this.params = {
-    //     pageNum: 1,
-    //     pageSize: 10,
-    //     name: '',
-    //     phone: ''
-    //   }
-    //   this.load()
-    // },
-    // handleCurrentChange(pageNum) {
-    //   // 点击分页按钮触发分页
-    //   this.params.pageNum = pageNum
-    //   this.load()
-    // },
-    // del(id) {
-    //   request.delete("/user/delete/" + id).then(res => {
-    //     if (res.code === '200') {
-    //       this.$notify.success('删除成功')
-    //       this.load()
-    //     } else {
-    //       this.$notify.error(res.msg)
-    //     }
-    //   })
-    // },
-    // handleAccountAdd(row) {
-    //   this.form = JSON.parse(JSON.stringify(row))
-    //   this.dialogFormVisible = true
-    // },
-    // addAccount() {
-    //   this.$refs['ruleForm'].validate((valid) => {
-    //     if (valid) {
-    //       request.post('/user/account', this.form).then(res => {
-    //         if (res.code === '200') {
-    //           this.$notify.success('充值成功')
-    //           this.dialogFormVisible = false
-    //           this.load()
-    //         } else {
-    //           this.$notify.error(res.msg)
-    //         }
-    //       })
-    //     }
-    //   })
-    // }
+    load() {
+      // fetch('http://localhost:9090/user/list').then(res => res.json()).then(res => {
+      //   console.log(res)
+      //   this.tableData = res
+      // })
+
+      request.get('/user/pages', {
+        params: this.params
+      }).then(res => {
+        if (res.code === '200') {
+          this.tableData = res.data.list
+          this.total = res.data.total
+        }
+      })
+    },
+    reset() {
+      this.params = {
+        pageNum: 1,
+        pageSize: 10,
+        name: '',
+        phone: ''
+      }
+      this.load()
+    },
+    handleCurrentChange(pageNum) {
+      // 点击分页按钮触发分页
+      this.params.pageNum = pageNum
+      this.load()
+    },
+    del(id) {
+      request.delete("/user/delete/" + id).then(res => {
+        if (res.code === '200') {
+          this.$notify.success('删除成功')
+          this.load()
+        } else {
+          this.$notify.error(res.msg)
+        }
+      })
+    },
+    handleAccountAdd(row) {
+      this.form = JSON.parse(JSON.stringify(row))
+      this.dialogFormVisible = true
+    },
+    addAccount() {
+      this.$refs['ruleForm'].validate((valid) => {
+        if (valid) {
+          request.post('/user/account', this.form).then(res => {
+            if (res.code === '200') {
+              this.$notify.success('充值成功')
+              this.dialogFormVisible = false
+              this.load()
+            } else {
+              this.$notify.error(res.msg)
+            }
+          })
+        }
+      })
+    }
   }
 }
 </script>

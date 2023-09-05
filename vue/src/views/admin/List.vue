@@ -42,17 +42,17 @@
       </el-table-column>
     </el-table>
 
-<!--    &lt;!&ndash;    分页&ndash;&gt;-->
-<!--    <div style="margin-top: 20px">-->
-<!--      <el-pagination-->
-<!--          background-->
-<!--          :current-page="params.pageNum"-->
-<!--          :page-size="params.pageSize"-->
-<!--          layout="prev, pager, next"-->
-<!--          @current-change="handleCurrentChange"-->
-<!--          :total="total">-->
-<!--      </el-pagination>-->
-<!--    </div>-->
+    <!--    分页-->
+    <div style="margin-top: 20px">
+      <el-pagination
+          background
+          :current-page="params.pageNum"
+          :page-size="params.pageSize"
+          layout="prev, pager, next"
+          @current-change="handleCurrentChange"
+          :total="total">
+      </el-pagination>
+    </div>
 
     <el-dialog title="修改密码" :visible.sync="dialogFormVisible" width="30%">
       <el-form :model="form" label-width="100px" ref="formRef" :rules="rules">
@@ -76,7 +76,7 @@ export default {
   name: 'AdminList',
   data() {
     return {
-
+      admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {},
       tableData: [],
       total: 0,
       form: {},
@@ -100,86 +100,80 @@ export default {
     this.load()
   },
   methods: {
-    load(){
-      fetch('http://localhost:9090/admin/list').then(res => res.json()).then(res => {
-        console.log(res)
-        this.tableData = res
+    changeStatus(row) {
+      if (this.admin.id === row.id && !row.status) {
+        row.status = true
+        this.$notify.warning('您的操作不合法')
+        return
+      }
+      request.put('/admin/update', row).then(res => {
+        if (res.code === '200') {
+          this.$notify.success('操作成功')
+          this.load()
+        } else {
+          this.$notify.error(res.msg)
+        }
+      })
+    },
+    handleChangePass(row) {
+      this.form = JSON.parse(JSON.stringify(row))
+      this.dialogFormVisible = true
+    },
+    savePass() {
+      this.$refs['formRef'].validate((valid) => {
+        if (valid) {
+          request.put('/admin/password', this.form).then(res => {
+            if (res.code === '200') {
+              this.$notify.success("修改成功")
+              if (this.form.id === this.admin.id) {   // 当前修改的用户id 等于当前登录的管理员id，那么修改成功之后需要重新登录
+                Cookies.remove('admin')
+                this.$router.push('/login')
+              } else {
+                this.load()
+                this.dialogFormVisible = false
+              }
+            } else {
+              this.$notify.error("修改失败")
+            }
+          })
+        }
+      })
+    },
+    load() {
+      request.get('/admin/page', {
+        params: this.params
+      }).then(res => {
+        if (res.code === '200') {
+          this.tableData = res.data.list
+          this.total = res.data.total
+        }
+      })
+    },
+    reset() {
+      this.params = {
+        pageNum: 1,
+        pageSize: 10,
+        username: '',
+        phone: '',
+        email: ''
+      }
+      this.load()
+    },
+    handleCurrentChange(pageNum) {
+      // 点击分页按钮触发分页
+      this.params.pageNum = pageNum
+      this.load()
+    },
+    del(id) {
+      request.delete("/admin/delete/" + id).then(res => {
+        if (res.code === '200') {
+          this.$notify.success('删除成功')
+          this.load()
+        } else {
+          this.$notify.error(res.msg)
+        }
       })
     }
-    // changeStatus(row) {
-    //   if (this.admin.id === row.id && !row.status) {
-    //     row.status = true
-    //     this.$notify.warning('您的操作不合法')
-    //     return
-    //   }
-    //   request.put('/admin/update', row).then(res => {
-    //     if (res.code === '200') {
-    //       this.$notify.success('操作成功')
-    //       this.load()
-    //     } else {
-    //       this.$notify.error(res.msg)
-    //     }
-    //   })
-    // },
-    // handleChangePass(row) {
-    //   this.form = JSON.parse(JSON.stringify(row))
-    //   this.dialogFormVisible = true
-    // },
-    // savePass() {
-    //   this.$refs['formRef'].validate((valid) => {
-    //     if (valid) {
-    //       request.put('/admin/password', this.form).then(res => {
-    //         if (res.code === '200') {
-    //           this.$notify.success("修改成功")
-    //           if (this.form.id === this.admin.id) {   // 当前修改的用户id 等于当前登录的管理员id，那么修改成功之后需要重新登录
-    //             Cookies.remove('admin')
-    //             this.$router.push('/login')
-    //           } else {
-    //             this.load()
-    //             this.dialogFormVisible = false
-    //           }
-    //         } else {
-    //           this.$notify.error("修改失败")
-    //         }
-    //       })
-    //     }
-    //   })
-    // },
-    // load() {
-    //   request.get('/admin/page', {
-    //     params: this.params
-    //   }).then(res => {
-    //     if (res.code === '200') {
-    //       this.tableData = res.data.list
-    //       this.total = res.data.total
-    //     }
-    //   })
-    // },
-    // reset() {
-    //   this.params = {
-    //     pageNum: 1,
-    //     pageSize: 10,
-    //     username: '',
-    //     phone: '',
-    //     email: ''
-    //   }
-    //   this.load()
-    // },
-    // handleCurrentChange(pageNum) {
-    //   // 点击分页按钮触发分页
-    //   this.params.pageNum = pageNum
-    //   this.load()
-    // },
-    // del(id) {
-    //   request.delete("/admin/delete/" + id).then(res => {
-    //     if (res.code === '200') {
-    //       this.$notify.success('删除成功')
-    //       this.load()
-    //     } else {
-    //       this.$notify.error(res.msg)
-    //     }
-    //   })
-    // }
   }
 }
 </script>
