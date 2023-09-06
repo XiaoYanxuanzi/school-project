@@ -1,8 +1,8 @@
 package com.example.springboot.mapper;
 
 import com.example.springboot.controller.request.BaseRequest;
+import com.example.springboot.controller.request.LoginRequest;
 import com.example.springboot.domain.Admin;
-import com.example.springboot.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,4 +20,13 @@ public interface AdminMapper {
 
     List<Admin> listByCondition(BaseRequest baseRequest);
 
+    void save(Admin admin);
+
+    Admin getById(Integer id);
+
+    Admin getByUsernameAndPassword(LoginRequest request);
+
+    void deleteById(Integer id);
+
+    void update(Admin admin);
 }

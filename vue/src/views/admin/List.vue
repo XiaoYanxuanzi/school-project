@@ -83,7 +83,7 @@ export default {
       dialogFormVisible: false,
       params: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 5,
         username: '',
         phone: '',
         email: ''
@@ -150,13 +150,7 @@ export default {
       })
     },
     reset() {
-      this.params = {
-        pageNum: 1,
-        pageSize: 10,
-        username: '',
-        phone: '',
-        email: ''
-      }
+      this.params = params
       this.load()
     },
     handleCurrentChange(pageNum) {

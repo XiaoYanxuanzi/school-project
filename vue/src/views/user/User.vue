@@ -88,7 +88,7 @@ export default {
       total: 0,
       params: {
         pageNum: 1,
-        pageSize: 3,
+        pageSize: 5,
         name: '',
         phone: ''
       },
@@ -96,12 +96,6 @@ export default {
       form: {},
 
     }
-  },
-
-  handleCurrentChange(pageNum) {
-    // 点击分页按钮触发分页
-    this.params.pageNum = pageNum
-    this.load()
   },
 
   created() {
@@ -123,6 +117,13 @@ export default {
           this.total = res.data.total
         }
       })
+    },
+
+    handleCurrentChange(pageNum) {
+      // 点击分页按钮触发分页
+      console.log(`当前页: ${pageNum}`);
+      this.params.pageNum = pageNum
+      this.load()
     },
 
     reset(){

@@ -52,6 +52,7 @@ export default {
             if (res.code === '200') {
               this.$notify.success('新增成功')
               this.$refs['ruleForm'].resetFields()
+              this.$router.push('adminList')
             } else {
               this.$notify.error(res.msg)
             }

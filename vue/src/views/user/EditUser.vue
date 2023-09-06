@@ -35,7 +35,8 @@ export default {
   name: 'EditUser',
   data() {
     return {
-      form: {}
+      form: {},
+
     }
   },
   created() {
