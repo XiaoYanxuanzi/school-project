@@ -1,5 +1,6 @@
 package com.example.springboot.mapper;
 
+import com.example.springboot.controller.dto.LoginDTO;
 import com.example.springboot.controller.request.BaseRequest;
 import com.example.springboot.controller.request.LoginRequest;
 import com.example.springboot.domain.Admin;
@@ -29,4 +30,5 @@ public interface AdminMapper {
     void deleteById(Integer id);
 
     void update(Admin admin);
+
 }

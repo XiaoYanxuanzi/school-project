@@ -53,6 +53,14 @@ public class AdminService implements IAdminService {
         adminMapper.update(admin);
     }
 
+    @Override
+    public LoginDTO login(LoginRequest request) {
+        Admin admin = adminMapper.getByUsernameAndPassword(request);
+        LoginDTO loginDTO = new LoginDTO();
+        BeanUtils.copyProperties(admin,loginDTO);
+        return loginDTO;
+    }
+
 
 //    @Override
 //    public List<Admin> listadmins() {

@@ -23,4 +23,6 @@ public interface IAdminService {
     void deleteById(Integer id);
 
     void update(Admin admin);
+
+    LoginDTO login(LoginRequest request);
 }

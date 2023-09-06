@@ -21,6 +21,12 @@ public class AdminController {
     @Autowired
     private IAdminService adminService;
 
+    @PostMapping("/login")
+    public Result login(@RequestBody LoginRequest request){
+        LoginDTO loginDTO = adminService.login(request);
+        return Result.success(loginDTO);
+    }
+
     @PutMapping("/update")
     public Result update(@RequestBody Admin admin){
         adminService.update(admin);
