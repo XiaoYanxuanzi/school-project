@@ -36,6 +36,7 @@ public class AdminController {
     @PostMapping("/login")
     public Result login(@RequestBody LoginRequest request){
         LoginDTO loginDTO = adminService.login(request);
+        System.out.println(loginDTO.getToken());
         return Result.success(loginDTO);
     }
 
