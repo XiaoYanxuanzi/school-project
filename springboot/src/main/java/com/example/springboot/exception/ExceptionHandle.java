@@ -13,6 +13,10 @@ public class ExceptionHandle {
     @ExceptionHandler(value = ServiceException.class)
     public Result serviceExceptionError(ServiceException e) {
         log.error("业务异常", e);
+        String code = e.getCode();
+        if (StrUtil.isNotBlank(code)) {
+            return Result.error(code, e.getMessage());
+        }
         return Result.error(e.getMessage());
     }
 

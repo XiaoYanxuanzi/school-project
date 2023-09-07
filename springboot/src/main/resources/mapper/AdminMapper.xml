@@ -21,8 +21,8 @@
     </select>
     
     <insert id="save">
-        insert into admin(username,phone,email)
-        values(#{username},#{phone},#{email})
+        insert into admin(username,phone,email,password,createtime)
+        values(#{username},#{phone},#{email},#{password},#{createtime})
     </insert>
 
     <select id="listByCondition" resultType="com.example.springboot.domain.Admin">
