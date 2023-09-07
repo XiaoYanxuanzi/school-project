@@ -4,6 +4,7 @@ import cn.hutool.crypto.SecureUtil;
 import com.example.springboot.controller.dto.LoginDTO;
 import com.example.springboot.controller.request.AdminPageRequest;
 import com.example.springboot.controller.request.LoginRequest;
+import com.example.springboot.controller.request.NewPassWordRequest;
 import com.example.springboot.domain.Admin;
 import com.example.springboot.domain.User;
 import com.example.springboot.exception.ServiceException;
@@ -15,6 +16,7 @@ import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
@@ -47,7 +49,12 @@ public class AdminService implements IAdminService {
         }
 
         admin.setPassword(SecureUtil.md5(admin.getPassword() + SALT));
-        adminMapper.save(admin);
+        try {
+            adminMapper.save(admin);
+        } catch (DuplicateKeyException e) {
+            log.error("数据插入失败， username:{}", admin.getUsername(), e);
+            throw new ServiceException("用户名重复");
+        }
     }
 
     @Override
@@ -79,12 +86,24 @@ public class AdminService implements IAdminService {
             throw new ServiceException("用户不存在");
         }
 
+        if (admin.isStatus() == false) {
+            throw new ServiceException("当前用户处于禁用状态，请联系管理员");
+        }
         LoginDTO loginDTO = new LoginDTO();
         BeanUtils.copyProperties(admin,loginDTO);
         // 生成token
         String token = TokenUtils.genToken(String.valueOf(admin.getId()), admin.getPassword());
         loginDTO.setToken(token);
         return loginDTO;
+    }
+
+    @Override
+    public void changePass(NewPassWordRequest request) {
+        request.setNewPass(SecureUtil.md5(request.getNewPass() + SALT));
+        int count = adminMapper.updatePassword(request);
+        if (count <= 0) {
+            throw new ServiceException("修改密码失败");
+        }
     }
 
 

@@ -3,6 +3,7 @@ package com.example.springboot.mapper;
 import com.example.springboot.controller.dto.LoginDTO;
 import com.example.springboot.controller.request.BaseRequest;
 import com.example.springboot.controller.request.LoginRequest;
+import com.example.springboot.controller.request.NewPassWordRequest;
 import com.example.springboot.domain.Admin;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -31,4 +32,5 @@ public interface AdminMapper {
 
     void update(Admin admin);
 
+    int updatePassword(NewPassWordRequest request);
 }

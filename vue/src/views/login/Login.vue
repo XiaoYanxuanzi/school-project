@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100vh; overflow: hidden; position: relative">
+  <div>
     <el-card class="cover" v-if="loginAdmin.id">
       <slide-verify :l="42"
                     :r="10"

@@ -48,7 +48,7 @@ public class Admin implements Serializable {
     /**
      * 状态
      */
-    private Integer status;
+    private boolean status;
 
     private static final long serialVersionUID = 1L;
 }

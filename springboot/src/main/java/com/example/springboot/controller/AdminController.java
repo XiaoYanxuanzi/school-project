@@ -4,6 +4,7 @@ import com.example.springboot.common.Result;
 import com.example.springboot.controller.dto.LoginDTO;
 import com.example.springboot.controller.request.AdminPageRequest;
 import com.example.springboot.controller.request.LoginRequest;
+import com.example.springboot.controller.request.NewPassWordRequest;
 import com.example.springboot.controller.request.UserPageRequest;
 import com.example.springboot.domain.Admin;
 import com.example.springboot.domain.User;
@@ -21,12 +22,28 @@ public class AdminController {
     @Autowired
     private IAdminService adminService;
 
+    @PutMapping("/password")
+    public Result changePass(@RequestBody NewPassWordRequest request){
+        adminService.changePass(request);
+        return Result.success();
+    }
+
+    /**
+     * 管理员登录
+     * @param request
+     * @return
+     */
     @PostMapping("/login")
     public Result login(@RequestBody LoginRequest request){
         LoginDTO loginDTO = adminService.login(request);
         return Result.success(loginDTO);
     }
 
+    /**
+     * 管理员信息修改
+     * @param admin
+     * @return
+     */
     @PutMapping("/update")
     public Result update(@RequestBody Admin admin){
         adminService.update(admin);
