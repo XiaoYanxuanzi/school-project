@@ -22,6 +22,11 @@ public class AdminController {
     @Autowired
     private IAdminService adminService;
 
+    /**
+     * 修改密码
+     * @param request
+     * @return
+     */
     @PutMapping("/password")
     public Result changePass(@RequestBody NewPassWordRequest request){
         adminService.changePass(request);

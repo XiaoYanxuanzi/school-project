@@ -18,7 +18,7 @@
       <el-table-column label="操作" width="230">
         <template v-slot="scope">
           <!--          scope.row 就是当前行数据-->
-          <el-button type="primary" @click="$router.push('/editAdmin?id=' + scope.row.id)">编辑</el-button>
+          <el-button type="primary" @click="$router.push('/editCategory?id=' + scope.row.id)">编辑</el-button>
           <el-popconfirm
               style="margin-left: 5px"
               title="您确定删除这行数据吗？"

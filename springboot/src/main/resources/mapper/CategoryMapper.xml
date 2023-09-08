@@ -16,7 +16,8 @@ order by id desc
 </select>
 
     <insert id="save">
-        insert into category(name, remark, pid) values(#{name}, #{remark}, #{pid})
+        insert into category(name, remark)
+        values(#{name}, #{remark})
     </insert>
 
     <update id="updateById">

@@ -12,11 +12,11 @@ public interface CategoryMapper {
 
     List<Category> listByCondition(CategoryRequest categoryRequest);
 
-    void save(Category obj);
+    void save(Category category);
 
     Category getById(Integer id);
 
-    void updateById(Category user);
+    void updateById(Category category);
 
     void deleteById(Integer id);
 

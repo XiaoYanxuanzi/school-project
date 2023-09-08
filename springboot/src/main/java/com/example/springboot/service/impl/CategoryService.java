@@ -7,17 +7,21 @@ import com.example.springboot.controller.request.CategoryRequest;
 import com.example.springboot.controller.request.UserPageRequest;
 import com.example.springboot.domain.Category;
 import com.example.springboot.domain.User;
+import com.example.springboot.exception.ServiceException;
 import com.example.springboot.mapper.CategoryMapper;
 import com.example.springboot.service.IAdminService;
 import com.example.springboot.service.ICategoryService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Service
 public class CategoryService implements ICategoryService {
 
@@ -34,8 +38,13 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public void save(Category category) {
-        Date date = new Date();
-        categoryMapper.save(category);
+
+        try {
+            categoryMapper.save(category);
+        } catch (Exception e) {
+            log.error("数据保存失败",e);
+            throw new ServiceException("数据保存失败");
+        }
     }
 
     @Override
@@ -50,6 +59,6 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public Category getById(Integer id) {
-        return null;
+        return categoryMapper.getById(id);
     }
 }
