@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     load() {
-      request.get('/book/page', {
+      request.get('/book/pages', {
         params: this.params
       }).then(res => {
         if (res.code === '200') {
