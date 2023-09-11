@@ -8,6 +8,8 @@ public class LoginDTO {
     private String username;
     private String phone;
     private String email;
-    private String token;
+    private String nickname;
+    private String address;
+    private String role;
 
 }

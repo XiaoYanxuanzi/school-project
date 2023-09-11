@@ -4,15 +4,20 @@
     <div style="height: 60px; line-height: 60px; background-color: white; margin-bottom: 2px; display: flex">
       <div style="width: 300px">
         <img src="@/assets/logo.png" alt="" style="width: 40px; position: relative; top: 10px; left: 20px">
-        <span style="margin-left: 25px; font-size: 24px">图书管理系统</span>
+        <span style="margin-left: 25px; font-size: 24px">课堂教学管理系统</span>
       </div>
       <div style="flex: 1; text-align: right; padding-right: 20px">
         <el-dropdown size="medium">
           <span class="el-dropdown-link" style="cursor: pointer">
-            {{ admin.username }}<i class="el-icon-arrow-down el-icon--right"></i>
+             <div style="display: flex; align-items: center; cursor: default">
+                <img :src="user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" alt="" style="width: 40px; height: 40px; border-radius: 50%; margin: 0 5px">
+                {{user.username}}<i class="el-icon-arrow-down el-icon--right"></i>
+              </div>
           </span>
           <el-dropdown-menu slot="dropdown" style="margin-top: -5px">
-            <el-dropdown-item><div style="width: 50px; text-align: center;" @click="logout">退出</div></el-dropdown-item>
+            <el-dropdown-item><div style="text-align: center;" >修改密码</div></el-dropdown-item>
+            <el-dropdown-item><div style="text-align: center;" >个人信息</div></el-dropdown-item>
+            <el-dropdown-item><div style="text-align: center;" @click="logout">退出</div></el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -27,52 +32,33 @@
             <i class="el-i"></i>
             <span>首页</span>
           </el-menu-item>
+          <el-menu-item index="/data">
+            <i class="el-i"></i>
+            <span>数据报表</span>
+          </el-menu-item>
           <el-submenu index="user">
             <template slot="title">
               <i class="el-icon-hot-water"></i>
-              <span>会员管理</span>
+              <span>用户管理</span>
             </template>
-            <el-menu-item index="/addUser">会员添加</el-menu-item>
-            <el-menu-item index="/userList">会员列表</el-menu-item>
+            <el-menu-item index="/addUser">用户添加</el-menu-item>
+            <el-menu-item index="/userList">用户列表</el-menu-item>
+          </el-submenu>
+          <el-submenu index="role">
+            <template slot="title">
+              <i class="el-icon-user"></i>
+              <span>角色管理</span>
+            </template>
+            <el-menu-item index="/addRole">角色添加</el-menu-item>
+            <el-menu-item index="/roleList">角色列表</el-menu-item>
           </el-submenu>
           <el-submenu index="admin">
             <template slot="title">
               <i class="el-icon-user"></i>
-              <span>管理员管理</span>
+              <span>权限管理</span>
             </template>
-            <el-menu-item index="/addAdmin">管理员添加</el-menu-item>
-            <el-menu-item index="/adminList">管理员列表</el-menu-item>
-          </el-submenu>
-          <el-submenu index="category">
-            <template slot="title">
-              <i class="el-icon-s-operation"></i>
-              <span>图书分类管理</span>
-            </template>
-            <el-menu-item index="/addCategory">图书分类添加</el-menu-item>
-            <el-menu-item index="/categoryList">图书分类列表</el-menu-item>
-          </el-submenu>
-          <el-submenu index="book">
-            <template slot="title">
-              <i class="el-icon-notebook-1"></i>
-              <span>图书管理</span>
-            </template>
-            <el-menu-item index="/addBook">图书添加</el-menu-item>
-            <el-menu-item index="/bookList">图书列表</el-menu-item>
-          </el-submenu>
-          <el-submenu index="borrow">
-            <template slot="title">
-              <i class="el-icon-document-copy"></i>
-              <span>借书管理</span>
-            </template>
-            <el-menu-item index="/addBorrow">借书添加</el-menu-item>
-            <el-menu-item index="/borrowList">借书列表</el-menu-item>
-          </el-submenu>
-          <el-submenu index="retur">
-            <template slot="title">
-              <i class="el-icon-document"></i>
-              <span>还书管理</span>
-            </template>
-            <el-menu-item index="/returList">还书列表</el-menu-item>
+            <el-menu-item index="/addAdmin">菜单管理</el-menu-item>
+            <el-menu-item index="/adminList">用户权限</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
@@ -93,13 +79,12 @@ export default {
   name: "Layout.vue",
   data() {
     return {
-      admin: Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : {}
+      user: JSON.parse(localStorage.getItem('roles') || '{}'),
     }
   },
   methods: {
-    logout() {
-      // 清除浏览器用户数据
-      Cookies.remove('admin')
+    logout(){
+      localStorage.removeItem('roles')  // 清除当前的token和用户数据
       this.$router.push('/login')
     }
   }
