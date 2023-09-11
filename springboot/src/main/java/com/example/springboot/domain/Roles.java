@@ -58,7 +58,7 @@ public class Roles implements Serializable {
     /**
      * 角色 0学生 1老师 2辅导员 3管理员
      */
-    private String role_type;
+    private String role;
 
     private static final long serialVersionUID = 1L;
 }

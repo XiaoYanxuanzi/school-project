@@ -23,6 +23,7 @@
       </div>
     </div>
 
+
     <!-- 侧边栏和主体 -->
     <div style="display: flex">
       <!-- 侧边栏导航 -->
@@ -32,11 +33,18 @@
             <i class="el-i"></i>
             <span>首页</span>
           </el-menu-item>
-          <el-menu-item index="/data">
+
+          <el-menu-item index="/data" v-if="user.role === '3'">
             <i class="el-i"></i>
             <span>数据报表</span>
           </el-menu-item>
-          <el-submenu index="user">
+
+          <el-menu-item index="/chat" v-if="user.role === '3'">
+            <i class="el-i"></i>
+            <span>聊天室</span>
+          </el-menu-item>
+
+          <el-submenu index="user" v-if="user.role === '3'">
             <template slot="title">
               <i class="el-icon-hot-water"></i>
               <span>用户管理</span>
@@ -44,7 +52,8 @@
             <el-menu-item index="/addUser">用户添加</el-menu-item>
             <el-menu-item index="/userList">用户列表</el-menu-item>
           </el-submenu>
-          <el-submenu index="role">
+
+          <el-submenu index="role" v-if="user.role === '3'">
             <template slot="title">
               <i class="el-icon-user"></i>
               <span>角色管理</span>
@@ -52,7 +61,8 @@
             <el-menu-item index="/addRole">角色添加</el-menu-item>
             <el-menu-item index="/roleList">角色列表</el-menu-item>
           </el-submenu>
-          <el-submenu index="admin">
+
+          <el-submenu index="admin" v-if="user.role === '3' ">
             <template slot="title">
               <i class="el-icon-user"></i>
               <span>权限管理</span>
