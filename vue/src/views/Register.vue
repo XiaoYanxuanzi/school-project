@@ -18,9 +18,9 @@
           </el-form-item>
           <el-form-item prop="role">
             <el-radio-group v-model="user.role">
-              <el-radio label="学生"></el-radio>
-              <el-radio label="老师"></el-radio>
-              <el-radio label="辅导员"></el-radio>
+              <el-radio label="0">学生</el-radio>
+              <el-radio label="1">老师</el-radio>
+              <el-radio label="2">辅导员</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item>
@@ -58,7 +58,8 @@ export default {
       user: {
         username: '',
         password: '',
-        confirmPass: ''
+        confirmPass: '',
+
       },
       rules: {
         username: [
@@ -83,7 +84,7 @@ export default {
       this.$refs["registerRef"].validate((valid) => {
         if (valid) {
           request.post('/role/register', this.user).then(res => {
-            console.log(res)
+
             if (res.code === '200') {
               this.$router.push('/login')
               this.$message.success('注册成功')
