@@ -1,10 +1,10 @@
 package com.example.springboot.mapper;
 
-import com.example.springboot.controller.dto.LoginDTO;
+import com.example.springboot.controller.request.BaseRequest;
 import com.example.springboot.domain.Roles;
 import org.apache.ibatis.annotations.Mapper;
 
-import javax.management.relation.Role;
+import java.util.List;
 
 /**
 * @author Administrator
@@ -18,6 +18,8 @@ public interface RolesMapper {
     Roles selectUsername(Roles role);
 
     void insertRole(Roles role);
+
+    List<Roles> listByCondition(BaseRequest baseRequest);
 }
 
 

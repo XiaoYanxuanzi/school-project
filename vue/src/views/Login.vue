@@ -106,7 +106,7 @@ export default {
       this.$refs["loginRef"].validate((valid) => {
         if (valid) {
           request.post('/role/login',this.user).then(res => {
-            console.log(res)
+            // console.log(res)
             if (res.code === '200'){
               this.$router.push('/')
               this.$message.success('登录成功')

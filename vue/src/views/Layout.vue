@@ -14,10 +14,22 @@
                 {{user.username}}<i class="el-icon-arrow-down el-icon--right"></i>
               </div>
           </span>
-          <el-dropdown-menu slot="dropdown" style="margin-top: -5px">
-            <el-dropdown-item><div style="text-align: center;" >修改密码</div></el-dropdown-item>
-            <el-dropdown-item><div style="text-align: center;" >个人信息</div></el-dropdown-item>
-            <el-dropdown-item><div style="text-align: center;" @click="logout">退出</div></el-dropdown-item>
+          <el-dropdown-menu slot="dropdown" style="width: 100px; text-align: center">
+            <el-dropdown-item>
+              <div @click="password">
+                修改密码
+              </div>
+            </el-dropdown-item>
+            <el-dropdown-item>
+              <div @click="person">
+                个人信息
+              </div>
+            </el-dropdown-item>
+            <el-dropdown-item>
+              <div @click="logout">
+                退出
+              </div>
+            </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -96,11 +108,24 @@ export default {
     logout(){
       localStorage.removeItem('roles')  // 清除当前的token和用户数据
       this.$router.push('/login')
+    },
+    password(){
+      this.$router.push('/password')
+    },
+    person(){
+      this.$router.push('/person')
     }
   }
 }
 </script>
 
 <style scoped>
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409EFF;
+}
 
+.el-icon-arrow-down {
+  font-size: 12px;
+}
 </style>

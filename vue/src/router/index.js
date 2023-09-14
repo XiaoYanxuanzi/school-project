@@ -43,6 +43,26 @@ const routes = [
         name: 'personchat',
         component: () => import('@/views/chat/Personchat.vue'),
       },
+      {
+        path: 'userList',
+        name: 'User',
+        component: () => import('@/views/user/User.vue'),
+      },
+      {
+        path: 'addUser',
+        name: 'AddUser',
+        component: () => import('@/views/user/AddUser.vue'),
+      },
+      {
+        path: 'person',
+        name: 'Person',
+        component: () => import('@/views/home/Person.vue'),
+      },
+      {
+        path: 'password',
+        name: 'Password',
+        component: () => import('@/views/home/Password.vue'),
+      },
     ]
   },
 ]
