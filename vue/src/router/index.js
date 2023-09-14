@@ -54,6 +54,11 @@ const routes = [
         component: () => import('@/views/user/AddUser.vue'),
       },
       {
+        path: 'editUser',
+        name: 'EditUser',
+        component: () => import('@/views/user/EditUser.vue'),
+      },
+      {
         path: 'person',
         name: 'Person',
         component: () => import('@/views/home/Person.vue'),

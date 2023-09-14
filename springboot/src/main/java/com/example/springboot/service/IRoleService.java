@@ -10,4 +10,6 @@ public interface IRoleService {
     Roles register(Roles role);
 
     PageInfo<Roles> page(BaseRequest baseRequest);
+
+    Roles getById(Integer id);
 }

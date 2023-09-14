@@ -10,7 +10,7 @@
         <el-dropdown size="medium">
           <span class="el-dropdown-link" style="cursor: pointer">
              <div style="display: flex; align-items: center; cursor: default">
-                <img :src="user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" alt="" style="width: 40px; height: 40px; border-radius: 50%; margin: 0 5px">
+                <img :src="user.avatarUrl || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" alt="" style="width: 40px; height: 40px; border-radius: 50%; margin: 0 5px">
                 {{user.username}}<i class="el-icon-arrow-down el-icon--right"></i>
               </div>
           </span>

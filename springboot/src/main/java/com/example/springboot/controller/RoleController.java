@@ -16,6 +16,17 @@ public class RoleController {
     private RoleServiceImpl roleService;
 
     /**
+     * 数据回显
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable Integer id) {
+        Roles roles = roleService.getById(id);
+        return Result.success(roles);
+    }
+
+    /**
      * 角色列表
      * @param userPageRequest
      * @return

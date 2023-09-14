@@ -15,6 +15,8 @@ import java.util.List;
 @Mapper
 public interface RolesMapper {
 
+    Roles getById(Integer id);
+
     Roles selectUsername(Roles role);
 
     void insertRole(Roles role);

@@ -50,4 +50,9 @@ public class RoleServiceImpl implements IRoleService {
         List<Roles> users = rolesMapper.listByCondition(baseRequest);
         return new PageInfo<>(users);
     }
+
+    @Override
+    public Roles getById(Integer id) {
+        return rolesMapper.getById(id);
+    }
 }

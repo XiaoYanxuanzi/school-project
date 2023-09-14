@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserPageRequest extends BaseRequest{
-    private String name;
+    private String nickname;
     private String address;
     private String email;
 }

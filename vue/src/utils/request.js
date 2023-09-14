@@ -13,16 +13,6 @@ const request = axios.create({
 request.interceptors.request.use(config => {
     config.headers['Content-Type'] = 'application/json;charset=utf-8';
 
-    const admin = Cookies.get('admin')
-
-    if (admin == null) {
-        router.push('/login')
-    }
-
-    if (admin){
-        //设置请求头
-        config.headers['token'] = JSON.parse(admin).token
-    }
 
     return config
 }, error => {
