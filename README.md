@@ -4,6 +4,6 @@
 # 技术栈
 后端：SpringBoot、Spring Data JPA、MyBatis、MySQL、Maven、JUnit
 
-前端：Vue、element-ui、Websocket
+前端：Vue2.x、element-ui、Websocket、axios、vue-router
 
 
