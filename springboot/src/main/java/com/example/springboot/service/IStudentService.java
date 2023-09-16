@@ -10,5 +10,5 @@ import java.util.List;
 public interface IStudentService {
 
 
-    void insert(StudentAttendance studentAttendance,HttpServletRequest request);
+    void insert(Roles roles, StudentAttendance studentAttendance);
 }

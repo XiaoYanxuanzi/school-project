@@ -2,6 +2,7 @@ package com.example.springboot.mapper;
 
 import com.example.springboot.domain.Roles;
 import com.example.springboot.domain.StudentAttendance;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author Administrator
@@ -9,11 +10,12 @@ import com.example.springboot.domain.StudentAttendance;
 * @createDate 2023-09-15 21:09:22
 * @Entity com.example.springboot.domain.StudentAttendance
 */
+@Mapper
 public interface StudentAttendanceMapper {
 
     void insert(StudentAttendance studentAttendance);
 
-    StudentAttendance selectStudentId();
+//    StudentAttendance selectStudentId();
 }
 
 

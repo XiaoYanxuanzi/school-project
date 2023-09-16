@@ -6,7 +6,7 @@
 
     <insert id="insert">
         insert into student_attendance(student_id,attendance_time)
-        values(#{student_id}, #{attendance_time})
+        values (#{studentId}, #{attendanceTime})
     </insert>
 
     <select id="selectStudentId">

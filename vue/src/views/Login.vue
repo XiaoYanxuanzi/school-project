@@ -110,7 +110,7 @@ export default {
             // console.log('res.data.role:', res.data.role);
             if (res.code === '200' && res.data.role === "0"){
               this.$router.push('/front/home')
-              this.$message.success('登录成功')
+              // this.$message.success('登录成功')
               localStorage.setItem("roles", JSON.stringify(res.data))  // 存储用户数据
             }
 

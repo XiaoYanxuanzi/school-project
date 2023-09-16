@@ -18,6 +18,11 @@ public class RoleController {
     @Autowired
     private RoleServiceImpl roleService;
 
+    /**
+     * 退出登录
+     * @param request
+     * @return
+     */
     @PostMapping("/logout")
     public Result logout(HttpServletRequest request) {
         System.out.println(request.getSession().getAttribute("roles"));
@@ -54,7 +59,7 @@ public class RoleController {
     @PostMapping("/login")
     public Result login(@RequestBody Roles role, HttpServletRequest request){
         Roles roles = roleService.login(role);
-        request.getSession().setAttribute("roles",roles.getId());
+        request.getSession().setAttribute("roles",roles);
         System.out.println(roles);
         return Result.success(roles);
     }

@@ -1,6 +1,7 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.common.Result;
+import com.example.springboot.domain.Roles;
 import com.example.springboot.domain.StudentAttendance;
 import com.example.springboot.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,9 @@ public class StudentController {
     @Autowired
     private StudentServiceImpl studentService;
 
-    @GetMapping("/insert")
-    public Result insert(@RequestBody StudentAttendance studentAttendance, HttpServletRequest request) {
-        HttpServletRequest roles = (HttpServletRequest) request.getSession().getAttribute("roles");
-        System.out.println(roles);
-        studentService.insert(studentAttendance, roles);
+    @PostMapping("/insert")
+    public Result insert(@RequestBody Roles roles, StudentAttendance studentAttendance) {
+        studentService.insert(roles,studentAttendance);
         return Result.success();
     }
 
