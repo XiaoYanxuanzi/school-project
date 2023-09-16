@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Layout from '../views/Layout.vue'
+import Layout from '../components/Layout.vue'
 import Cookies from "js-cookie";
 
 Vue.use(VueRouter)
@@ -67,6 +67,11 @@ const routes = [
         path: 'password',
         name: 'Password',
         component: () => import('@/views/home/Password.vue'),
+      },
+      {
+        path: 'front/home',
+        name: 'home',
+        component: () => import('@/views/front/home.vue'),
       },
     ]
   },

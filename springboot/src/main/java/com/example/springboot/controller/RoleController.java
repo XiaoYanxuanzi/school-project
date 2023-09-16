@@ -7,6 +7,9 @@ import com.example.springboot.service.impl.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/role")
@@ -14,6 +17,13 @@ public class RoleController {
 
     @Autowired
     private RoleServiceImpl roleService;
+
+    @PostMapping("/logout")
+    public Result logout(HttpServletRequest request) {
+        System.out.println(request.getSession().getAttribute("roles"));
+        request.getSession().removeAttribute("roles");
+        return Result.success();
+    }
 
     /**
      * 数据回显
@@ -42,8 +52,9 @@ public class RoleController {
      * @return
      */
     @PostMapping("/login")
-    public Result login(@RequestBody Roles role){
+    public Result login(@RequestBody Roles role, HttpServletRequest request){
         Roles roles = roleService.login(role);
+        request.getSession().setAttribute("roles",roles.getId());
         System.out.println(roles);
         return Result.success(roles);
     }

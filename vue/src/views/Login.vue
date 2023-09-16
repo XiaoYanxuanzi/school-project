@@ -106,8 +106,15 @@ export default {
       this.$refs["loginRef"].validate((valid) => {
         if (valid) {
           request.post('/role/login',this.user).then(res => {
-            // console.log(res)
-            if (res.code === '200'){
+            // console.log('res.code:', res.code);
+            // console.log('res.data.role:', res.data.role);
+            if (res.code === '200' && res.data.role === "0"){
+              this.$router.push('/front/home')
+              this.$message.success('登录成功')
+              localStorage.setItem("roles", JSON.stringify(res.data))  // 存储用户数据
+            }
+
+            if (res.code === '200' && !res.data.role === "0"){
               this.$router.push('/')
               this.$message.success('登录成功')
               localStorage.setItem("roles", JSON.stringify(res.data))  // 存储用户数据

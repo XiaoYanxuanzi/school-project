@@ -96,6 +96,7 @@
 
 <script>
 import Cookies from 'js-cookie'
+import request from "@/utils/request";
 
 export default {
   name: "Layout.vue",
@@ -106,8 +107,15 @@ export default {
   },
   methods: {
     logout(){
-      localStorage.removeItem('roles')  // 清除当前的token和用户数据
-      this.$router.push('/login')
+      request.post('/role/logout',this.user).then(res => {
+        if (res.code === '200'){
+          localStorage.removeItem('roles')  // 清除当前的token和用户数据
+          this.$router.push('/login')
+          this.$message.success('退出成功')
+        }
+      })
+
+
     },
     password(){
       this.$router.push('/password')
