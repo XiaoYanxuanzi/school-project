@@ -1,6 +1,7 @@
 package com.example.springboot.service.impl;
 
 
+import cn.hutool.core.date.DateUtil;
 import com.example.springboot.domain.Roles;
 import com.example.springboot.domain.StudentAttendance;
 import com.example.springboot.exception.ServiceException;
@@ -21,7 +22,7 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public void insert(Roles roles, StudentAttendance studentAttendance) {
-
+        Date date = new Date();
         List<Integer> studentIds = studentAttendanceMapper.findStudentIds();
 
         if (roles == null){
@@ -31,7 +32,12 @@ public class StudentServiceImpl implements IStudentService {
 
         studentAttendance.setStudentId(roles.getId());
         studentAttendance.setAttendanceTime(new Date());
+        studentAttendance.setAttendanceDay(DateUtil.format(date, "yyyy-MM-dd"));
+        studentAttendance.setAttendanceStatus("1");
 
+        /**
+         * 校验一个账号一次打卡
+         */
         if (studentIds.contains(studentAttendance.getStudentId())) {
             throw new ServiceException("该学生已经存在打卡记录");
         }
@@ -41,4 +47,6 @@ public class StudentServiceImpl implements IStudentService {
         studentAttendanceMapper.insert(studentAttendance);
 
     }
+
+
 }
