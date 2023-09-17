@@ -4,6 +4,8 @@ import com.example.springboot.domain.Roles;
 import com.example.springboot.domain.StudentAttendance;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
 * @author Administrator
 * @description 针对表【student_attendance(学生考勤表)】的数据库操作Mapper
@@ -15,7 +17,7 @@ public interface StudentAttendanceMapper {
 
     void insert(StudentAttendance studentAttendance);
 
-//    StudentAttendance selectStudentId();
+    List<Integer> findStudentIds();
 }
 
 

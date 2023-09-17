@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class StudentServiceImpl implements IStudentService {
@@ -21,19 +22,21 @@ public class StudentServiceImpl implements IStudentService {
     @Override
     public void insert(Roles roles, StudentAttendance studentAttendance) {
 
+        List<Integer> studentIds = studentAttendanceMapper.findStudentIds();
+
         if (roles == null){
-            throw new ServiceException("未获取到用户信息1");
+            throw new ServiceException("未获取到角色信息");
         }
+
 
         studentAttendance.setStudentId(roles.getId());
+        studentAttendance.setAttendanceTime(new Date());
 
-        if (studentAttendance.getStudentId() == null){
-            throw new ServiceException("未获取到用户信息2");
+        if (studentIds.contains(studentAttendance.getStudentId())) {
+            throw new ServiceException("该学生已经存在打卡记录");
         }
 
-
-        studentAttendance.setAttendanceTime(new Date());
-        System.out.println(studentAttendance);
+//        System.out.println(studentAttendance);
 
         studentAttendanceMapper.insert(studentAttendance);
 
