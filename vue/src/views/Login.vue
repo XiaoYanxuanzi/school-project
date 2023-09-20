@@ -105,23 +105,15 @@ export default {
     login() {
       this.$refs["loginRef"].validate((valid) => {
         if (valid) {
-          request.post('/role/login',this.user).then(res => {
+          request.post('/student/login',this.user).then(res => {
             // console.log('res.code:', res.code);
             // console.log('res.data.role:', res.data.role);
-            if (res.code === '200' && res.data.role === "0"){
+            if (res.code === '200'){
               this.$router.push('/front/home')
               this.$message.success('登录成功')
-              localStorage.setItem("roles", JSON.stringify(res.data))  // 存储用户数据
+              localStorage.setItem("student", JSON.stringify(res.data))  // 存储用户数据
             }else {
               this.$message.success(res.msg)
-            }
-
-            console.log('res.data.role:', res.data.role)
-
-            if (res.data.role === "1" || res.data.role === "2" || res.data.role === "3"){
-              this.$router.push('/home')
-              this.$message.success('登录成功')
-              localStorage.setItem("roles", JSON.stringify(res.data))  // 存储用户数据
             }
           })
         }

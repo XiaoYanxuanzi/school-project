@@ -8,23 +8,24 @@ import lombok.Data;
 
 /**
  * 学生考勤表
- * @TableName student_attendance
+ * @TableName attendance
  */
 @Data
-public class StudentAttendance implements Serializable {
+public class Attendance implements Serializable {
     /**
      * 
      */
     private Integer id;
 
     /**
-     * 学生id
+     * 学生表id
      */
     private Integer studentId;
 
     /**
      * 打卡时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date attendanceTime;
 
     /**
@@ -34,14 +35,14 @@ public class StudentAttendance implements Serializable {
     private String attendanceDay;
 
     /**
-     * 打卡状态
+     * 出席情况 迟到 旷课
      */
-    private String attendanceStatus;
+    private String attendance;
 
     /**
-     * 附加说明
+     * 是否已考勤
      */
-    private String description;
+    private String isAttended;
 
     private static final long serialVersionUID = 1L;
 }

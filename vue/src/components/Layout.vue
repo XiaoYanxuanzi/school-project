@@ -102,14 +102,14 @@ export default {
   name: "Layout.vue",
   data() {
     return {
-      user: JSON.parse(localStorage.getItem('roles') || '{}'),
+      user: JSON.parse(localStorage.getItem('student') || '{}'),
     }
   },
   methods: {
     logout(){
-      request.post('/role/logout',this.user).then(res => {
+      request.post('/student/logout',this.user).then(res => {
         if (res.code === '200'){
-          localStorage.removeItem('roles')  // 清除当前的token和用户数据
+          localStorage.removeItem('student')  // 清除当前的token和用户数据
           this.$router.push('/login')
           this.$message.success('退出成功')
         }

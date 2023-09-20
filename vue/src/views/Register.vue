@@ -83,7 +83,7 @@ export default {
     register() {
       this.$refs["registerRef"].validate((valid) => {
         if (valid) {
-          request.post('/role/register', this.user).then(res => {
+          request.post('/student/register', this.user).then(res => {
 
             if (res.code === '200') {
               this.$router.push('/login')

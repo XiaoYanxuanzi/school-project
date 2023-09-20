@@ -26,7 +26,7 @@ export default {
   },
   methods: {
       Daka(){
-        request.post("/student/insert",this.user).then(res => {
+        request.post("/student/attendance",this.user).then(res => {
           console.log(this.user.username)
           if (res.code === '200'){
             this.$message.success("打卡成功")

@@ -1,14 +1,16 @@
 package com.example.springboot.service;
 
-import com.example.springboot.domain.Roles;
-import com.example.springboot.domain.StudentAttendance;
+import com.example.springboot.domain.Attendance;
+import com.example.springboot.domain.Student;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface IStudentService {
 
+    Student login(Student student);
 
-    void insert(Roles roles, StudentAttendance studentAttendance);
+    Student register(Student student);
+
+    void insert(Student student,Attendance attendance);
+
 }
