@@ -15,9 +15,4 @@ public class SpringbootApplication {
         SpringApplication.run(SpringbootApplication.class, args);
     }
 
-    // 健康检查的接口
-    @GetMapping
-    public String health() {
-        return "SUCCESS";
-    }
 }

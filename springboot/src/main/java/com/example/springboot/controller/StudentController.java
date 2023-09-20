@@ -24,9 +24,6 @@ public class StudentController {
         if (student == null) {
             throw new ServiceException("未登录");
         }
-        if (attendance == null) {
-            throw new ServiceException("参数错误");
-        }
         studentService.insert((Student) student,attendance);
         System.out.println(student);
         return Result.success();

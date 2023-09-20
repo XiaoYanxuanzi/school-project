@@ -2,6 +2,7 @@ package com.example.springboot.service.impl;
 
 import cn.hutool.core.date.DateUtil;
 import com.example.springboot.domain.Attendance;
+import com.example.springboot.domain.ClassSchedule;
 import com.example.springboot.domain.Student;
 import com.example.springboot.exception.ServiceException;
 import com.example.springboot.mapper.AttendanceMapper;
@@ -26,7 +27,8 @@ public class StudentServiceImpl implements IStudentService {
         //查询所有studentId
         List<Integer> studentIds = attendanceMapper.findStudentIds();
         String today = DateUtil.today();
-        // 这里
+
+
         if (student == null) {
             System.out.println(student);
             throw new ServiceException("未获取到学生信息");
