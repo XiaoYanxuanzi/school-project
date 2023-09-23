@@ -1,5 +1,7 @@
 <template>
 <div>
+  <el-page-header @back="goBack" content="详情页面">
+  </el-page-header>
   <el-row>
     <el-button icon="el-icon-search" circle @click="Daka"></el-button>
     <el-button type="primary" icon="el-icon-edit" circle></el-button>
@@ -9,6 +11,7 @@
     <el-button type="danger" icon="el-icon-delete" circle></el-button>
   </el-row>
 </div>
+
 </template>
 
 <script>
@@ -19,6 +22,7 @@ export default {
   data() {
     return {
       user: JSON.parse(localStorage.getItem('roles') || '{}'),
+
     }
   },
   mounted() {  // 等页面元素全部初始化好

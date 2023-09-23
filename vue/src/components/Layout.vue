@@ -51,12 +51,12 @@
             <span>数据报表</span>
           </el-menu-item>
 
-          <el-menu-item index="/chat" v-if="user.role === '3'">
+          <el-menu-item index="/chat" >
             <i class="el-i"></i>
             <span>聊天室</span>
           </el-menu-item>
 
-          <el-submenu index="user" v-if="user.role === '3'">
+          <el-submenu index="user">
             <template slot="title">
               <i class="el-icon-hot-water"></i>
               <span>用户管理</span>
@@ -65,7 +65,7 @@
             <el-menu-item index="/userList">用户列表</el-menu-item>
           </el-submenu>
 
-          <el-submenu index="role" v-if="user.role === '3'">
+          <el-submenu index="role">
             <template slot="title">
               <i class="el-icon-user"></i>
               <span>角色管理</span>
@@ -74,7 +74,7 @@
             <el-menu-item index="/roleList">角色列表</el-menu-item>
           </el-submenu>
 
-          <el-submenu index="admin" v-if="user.role === '3' ">
+          <el-submenu index="admin">
             <template slot="title">
               <i class="el-icon-user"></i>
               <span>权限管理</span>

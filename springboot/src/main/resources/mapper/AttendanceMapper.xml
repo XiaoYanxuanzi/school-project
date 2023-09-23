@@ -5,8 +5,8 @@
 <mapper namespace="com.example.springboot.mapper.AttendanceMapper">
 
     <insert id="insert">
-        INSERT INTO attendance (student_id, attendance, is_attended,attendance_time,attendance_day)
-        VALUES (#{studentId},#{attendance},#{isAttended},#{attendanceTime},#{attendanceDay})
+        INSERT INTO attendance (student_id, attendance, is_attended,attendance_day)
+        VALUES (#{studentId},#{attendance},#{isAttended},#{attendanceDay})
     </insert>
 
     <select id="findStudentIds" resultType="java.lang.Integer">

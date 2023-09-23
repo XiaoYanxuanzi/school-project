@@ -23,12 +23,6 @@ public class Attendance implements Serializable {
     private Integer studentId;
 
     /**
-     * 打卡时间
-     */
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    private Date attendanceTime;
-
-    /**
      * 打卡日期
      */
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")

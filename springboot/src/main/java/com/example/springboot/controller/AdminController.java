@@ -17,6 +17,8 @@ public class AdminController {
     @Autowired
     private AdminServiceImpl adminService;
 
+
+
     /**
      * 管理员登录
      * @param admin

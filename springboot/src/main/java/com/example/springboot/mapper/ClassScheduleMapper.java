@@ -1,6 +1,10 @@
 package com.example.springboot.mapper;
 
+
+import com.example.springboot.domain.ClassSchedule;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
 * @author Administrator
@@ -11,6 +15,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ClassScheduleMapper {
 
+    List<ClassSchedule> findByTime();
 }
 
 

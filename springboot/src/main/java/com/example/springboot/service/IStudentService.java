@@ -12,6 +12,6 @@ public interface IStudentService {
 
     Student register(Student student);
 
-    void insert(Student student, Attendance attendance);
+    void insert(Student student, Attendance attendance,ClassSchedule classSchedule);
 
 }
