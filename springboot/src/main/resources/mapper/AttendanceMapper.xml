@@ -5,9 +5,25 @@
 <mapper namespace="com.example.springboot.mapper.AttendanceMapper">
 
     <insert id="insert">
-        INSERT INTO attendance (student_id, attendance, is_attended,attendance_day)
-        VALUES (#{studentId},#{attendance},#{isAttended},#{attendanceDay})
+        INSERT INTO attendance (student_id, attendance, is_attended,attendance_day,attendance_time)
+        VALUES (#{studentId},#{attendance},#{isAttended},#{attendanceDay},#{attendanceTime})
     </insert>
+
+    <update id="update">
+        update attendance
+        set attendance = #{attendance},
+            attendance_day = #{attendanceDay},
+            attendance_time = #{attendanceTime} where student_id = #{studentId}
+    </update>
+
+    <update id="updateAttendanceAttended">
+        update attendance
+        set attendance = #{attendance},
+            is_attended = #{isAttended},
+            attendance_day = #{attendanceDay},
+            attendance_time = #{attendanceTime} where student_id = #{studentId}
+    </update>
+
 
     <select id="findStudentIds" resultType="java.lang.Integer">
         SELECT student_id FROM attendance

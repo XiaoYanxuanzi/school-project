@@ -18,6 +18,12 @@ public interface AttendanceMapper {
 
     //查询所有学生id列
     List<Integer> findStudentIds();
+
+    //修改考勤记录（打卡和迟到）
+    void update(Attendance attendance);
+
+    //修改考勤记录（缺席）
+    void updateAttendanceAttended(Attendance attendance);
 }
 
 

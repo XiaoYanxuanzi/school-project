@@ -1,6 +1,7 @@
 package com.example.springboot.domain;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -27,6 +28,11 @@ public class Attendance implements Serializable {
      */
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private String attendanceDay;
+
+    /**
+     * 打卡时间
+     */
+    private Time attendanceTime;
 
     /**
      * 出席情况 迟到 旷课
