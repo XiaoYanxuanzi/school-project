@@ -54,5 +54,15 @@ public class Student implements Serializable {
      */
     private String sex;
 
+    /**
+     * 班级id
+     */
+    private Integer classId;
+
+    /**
+     * 学号
+     */
+    private String number;
+
     private static final long serialVersionUID = 1L;
 }

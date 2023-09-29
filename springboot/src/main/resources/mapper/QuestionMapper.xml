@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.QuestionMapper">
+    <insert id="save">
+        <!-- 指定要插入的表和列 -->
+        INSERT INTO question (student_id,teacher_id,content, send_time)
+        VALUES (#{studentId}, #{teacherId}, #{content}, #{sendTime})
+    </insert>
+</mapper>

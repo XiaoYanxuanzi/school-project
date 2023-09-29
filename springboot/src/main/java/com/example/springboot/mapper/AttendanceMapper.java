@@ -24,6 +24,9 @@ public interface AttendanceMapper {
 
     //修改考勤记录（缺席）
     void updateAttendanceAttended(Attendance attendance);
+
+    //根据id来修改状态（请假）
+    void updateAttendance(Long attendanceId, String newStatus);
 }
 
 

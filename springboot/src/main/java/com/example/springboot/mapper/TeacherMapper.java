@@ -3,6 +3,8 @@ package com.example.springboot.mapper;
 import com.example.springboot.domain.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
 * @author Administrator
 * @description 针对表【teacher(老师表)】的数据库操作Mapper
@@ -11,6 +13,8 @@ import org.apache.ibatis.annotations.Mapper;
 */
 @Mapper
 public interface TeacherMapper {
+
+    List<Teacher> getAllTeachersByNickname();
 
     Teacher selectUsername(Teacher teacher);
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -16,6 +17,19 @@ public class TeacherController {
 
     @Autowired
     private TeacherServiceImpl teacherService;
+
+
+    /**
+     * 修改学生出席情况
+     * @param attendanceId
+     * @param newStatus
+     * @return
+     */
+    @PutMapping("/{attendanceId}")
+    public Result updateAttendanceStatus(@PathVariable Long attendanceId, @RequestParam String newStatus) {
+        teacherService.updateAttendanceStatus(attendanceId,newStatus);
+        return Result.success();
+    }
 
     /**
      * 教师登录

@@ -10,6 +10,7 @@ import com.example.springboot.mapper.AttendanceMapper;
 import com.example.springboot.mapper.ClassScheduleMapper;
 import com.example.springboot.mapper.StudentMapper;
 import com.example.springboot.service.IStudentService;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.sql.Time;
@@ -29,6 +30,12 @@ public class StudentServiceImpl implements IStudentService {
 
     @Resource
     private ClassScheduleMapper classScheduleMapper;
+
+    // 凌晨自动执行
+    @Scheduled(cron = "0 0 0 * * ?")
+    public void checkAttendanceStatus() {
+        
+    }
 
     @Override
     public void insert(Student student, Attendance attendance,ClassSchedule classSchedule) {

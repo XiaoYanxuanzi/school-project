@@ -24,6 +24,12 @@
             attendance_time = #{attendanceTime} where student_id = #{studentId}
     </update>
 
+    <update id="updateAttendance">
+        UPDATE attendance
+        set attendance = #{newStatus}
+        WHERE id = #{attendanceId}
+    </update>
+
 
     <select id="findStudentIds" resultType="java.lang.Integer">
         SELECT student_id FROM attendance

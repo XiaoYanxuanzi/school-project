@@ -1,16 +1,17 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.common.Result;
-import com.example.springboot.domain.Attendance;
-import com.example.springboot.domain.ClassSchedule;
-import com.example.springboot.domain.Student;
+import com.example.springboot.domain.*;
 import com.example.springboot.exception.ServiceException;
+import com.example.springboot.service.impl.QuestionServiceImpl;
 import com.example.springboot.service.impl.StudentServiceImpl;
+import com.example.springboot.service.impl.TeacherServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 @RestController
@@ -20,6 +21,30 @@ public class StudentController {
 
     @Resource
     private StudentServiceImpl studentService;
+
+    @Resource
+    private QuestionServiceImpl questionService;
+
+    @Resource
+    private TeacherServiceImpl teacherService;
+
+
+
+    @PostMapping("/ask")
+    public Result askQuestion(@RequestBody Question question){
+        questionService.save(question);
+        return Result.success();
+    }
+
+    /**
+     * 获取所有教师名称
+     * @return
+     */
+    @GetMapping("/getAll")
+    public Result getAllTeachers(){
+        List<Teacher> teachers = teacherService.getAllTeachersByNickname();
+        return Result.success(teachers);
+    }
 
     /**
      * 学生打卡

@@ -13,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 /**
  * knife4j 配置类，集成了 swagger
  *
- * 访问的地址是：http://localhost:9090/doc.htm
+ * 访问的地址是：http://localhost:9090/doc.html
  *
  */
 // 让这个 bean 只在本地运行

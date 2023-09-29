@@ -39,39 +39,43 @@
     <!-- 侧边栏和主体 -->
     <div style="display: flex">
       <!-- 侧边栏导航 -->
-      <div style="width: 200px; min-height: calc(100vh - 62px); overflow: hidden; margin-right: 2px; background-color: white">
-        <el-menu :default-active="$route.path" router class="el-menu-demo" style="margin-bottom: 10px">
+      <div style=" overflow: hidden; margin-right: 2px; background-color: white">
+        <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+          <el-radio-button :label="false">展开</el-radio-button>
+          <el-radio-button :label="true">收起</el-radio-button>
+        </el-radio-group>
+        <el-menu :default-active="$route.path" router class="el-menu-vertical-demo" :collapse="isCollapse">
           <el-menu-item index="/">
             <i class="el-i"></i>
             <span>首页</span>
           </el-menu-item>
 
-          <el-menu-item index="/data" v-if="user.role === '3'">
+          <el-menu-item index="/data">
             <i class="el-i"></i>
             <span>数据报表</span>
           </el-menu-item>
 
           <el-menu-item index="/chat" >
             <i class="el-i"></i>
-            <span>聊天室</span>
+            <span>聊天信息</span>
           </el-menu-item>
 
           <el-submenu index="user">
             <template slot="title">
               <i class="el-icon-hot-water"></i>
-              <span>用户管理</span>
+              <span>学生管理</span>
             </template>
-            <el-menu-item index="/addUser">用户添加</el-menu-item>
-            <el-menu-item index="/userList">用户列表</el-menu-item>
+            <el-menu-item index="/addUser">学生添加</el-menu-item>
+            <el-menu-item index="/userList">学生列表</el-menu-item>
           </el-submenu>
 
           <el-submenu index="role">
             <template slot="title">
               <i class="el-icon-user"></i>
-              <span>角色管理</span>
+              <span>教师管理</span>
             </template>
-            <el-menu-item index="/addRole">角色添加</el-menu-item>
-            <el-menu-item index="/roleList">角色列表</el-menu-item>
+            <el-menu-item index="/addRole">教师添加</el-menu-item>
+            <el-menu-item index="/roleList">教师列表</el-menu-item>
           </el-submenu>
 
           <el-submenu index="admin">
@@ -87,7 +91,7 @@
 
       <!-- 主体数据 -->
       <!-- width: 0; 可以限制容器的宽度，不被子元素无限撑开-->
-      <div style="flex: 1; width: 0; background-color: white; padding: 10px">
+      <div style="flex: 1; width: 0; background-color: white;">
         <router-view />
       </div>
     </div>
@@ -103,6 +107,7 @@ export default {
   data() {
     return {
       user: JSON.parse(localStorage.getItem('student') || '{}'),
+      isCollapse: true
     }
   },
   methods: {
@@ -114,20 +119,25 @@ export default {
           this.$message.success('退出成功')
         }
       })
-
-
     },
+
     password(){
       this.$router.push('/password')
     },
+
     person(){
       this.$router.push('/person')
-    }
+    },
   }
 }
 </script>
 
 <style scoped>
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
+
 .el-dropdown-link {
   cursor: pointer;
   color: #409EFF;

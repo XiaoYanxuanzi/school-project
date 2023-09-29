@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '../components/Layout.vue'
 import Cookies from "js-cookie";
+import LayoutFront from "@/components/LayoutFront";
 
 Vue.use(VueRouter)
 
@@ -40,8 +41,8 @@ const routes = [
       },
       {
         path: 'chat',
-        name: 'personchat',
-        component: () => import('@/views/chat/Personchat.vue'),
+        name: 'Notice',
+        component: () => import('@/views/chat/notice.vue'),
       },
       {
         path: 'userList',
@@ -68,10 +69,24 @@ const routes = [
         name: 'Password',
         component: () => import('@/views/home/Password.vue'),
       },
+
+    ]
+  },
+  {
+    path: '/front',
+    name: 'LayoutFront',
+    component: LayoutFront,
+    redirect: '/home',
+    children: [  // 子路由
       {
-        path: 'front/home',
+        path: 'home',
         name: 'home',
         component: () => import('@/views/front/home.vue'),
+      },
+      {
+        path: 'notice',
+        name: 'notice',
+        component: () => import('@/views/front/bar/notice.vue'),
       },
     ]
   },

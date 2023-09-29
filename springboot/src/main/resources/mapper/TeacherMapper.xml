@@ -8,6 +8,10 @@
         select * from teacher where username=#{username}
     </select>
 
+    <select id="getAllTeachersByNickname" resultType="com.example.springboot.domain.Teacher">
+        SELECT nickname FROM teacher where roles = 0
+    </select>
+
     <insert id="insertTeacher">
         INSERT INTO teacher (username, nickname, password)
         VALUES (#{username},#{nickname},#{password})

@@ -12,7 +12,7 @@
 
     </div>
     <el-card>
-      <div id="line" style="width: 100%; height: 455px"></div>
+      <div id="line" style="height: 455px"></div>
     </el-card>
   </div>
 </template>
@@ -38,7 +38,5 @@ import * as echarts from 'echarts'
 </script>
 
 <style>
-.input {
-  width: 300px;
-}
+
 </style>
