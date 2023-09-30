@@ -32,7 +32,7 @@
         <el-form-item label="接收人" prop="title">
           <el-select v-model="value" placeholder="请选择老师">
             <el-option
-                v-for="item in cities"
+                v-for="item in teacher"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
@@ -53,7 +53,7 @@
 
       <div slot="footer" class="dialog-footer">
         <el-button @click="fromVisible = false">取 消</el-button>
-        <el-button type="primary">确 定</el-button>
+        <el-button type="primary" @click="question">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -65,25 +65,7 @@ export default {
   name: "home",
   data() {
     return {
-      cities: [{
-        value: 'Beijing',
-        label: '北京'
-      }, {
-        value: 'Shanghai',
-        label: '上海'
-      }, {
-        value: 'Nanjing',
-        label: '南京'
-      }, {
-        value: 'Chengdu',
-        label: '成都'
-      }, {
-        value: 'Shenzhen',
-        label: '深圳'
-      }, {
-        value: 'Guangzhou',
-        label: '广州'
-      }],
+      teacher:[],
       value: '',
       form: {},
       user: JSON.parse(localStorage.getItem('roles') || '{}'),
@@ -100,9 +82,10 @@ export default {
     }
   },
   mounted() {  // 等页面元素全部初始化好
-
+    this.Allteachers();
   },
   methods: {
+      //打卡
       Daka(){
         request.post("/student/attendance",this.user).then(res => {
           console.log(this.user.username)
@@ -113,9 +96,35 @@ export default {
           }
         })
       },
+
       handleAdd() {   // 新增数据
         this.fromVisible = true   // 打开弹窗
       },
+
+      //获取老师信息
+      Allteachers(){
+        request.get("/student/getAll").then(res => {
+          console.log(res);
+          // 将返回的数据格式转换为选项所需的格式
+          this.teacher = res.data.map(item => ({
+            value: item.id,
+            label: item.nickname
+          }));
+          console.log(this.teacher);
+        })
+      },
+
+      //提交信息
+      question(){
+        request.post("/student/ask").then(res => {
+          console.log(res)
+          if (res.code === '200'){
+            this.$message.success("提问成功")
+          }else {
+            this.$message.error(res.msg)
+          }
+        })
+      }
   }
 }
 </script>

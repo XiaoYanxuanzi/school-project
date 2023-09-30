@@ -9,7 +9,7 @@
     </select>
 
     <select id="getAllTeachersByNickname" resultType="com.example.springboot.domain.Teacher">
-        SELECT nickname FROM teacher where roles = 0
+        SELECT id,nickname FROM teacher where roles = 0
     </select>
 
     <insert id="insertTeacher">

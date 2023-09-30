@@ -63,7 +63,15 @@ export default {
     };
   },
   methods: {
-
+    logout(){
+      request.post('/student/logout',this.user).then(res => {
+        if (res.code === '200'){
+          localStorage.removeItem('student')  // 清除当前的token和用户数据
+          this.$router.push('/login')
+          this.$message.success('退出成功')
+        }
+      })
+    },
   }
 }
 </script>

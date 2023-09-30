@@ -31,8 +31,12 @@ public class StudentController {
 
 
     @PostMapping("/ask")
-    public Result askQuestion(@RequestBody Question question){
-        questionService.save(question);
+    public Result askQuestion(@RequestBody Question question,HttpServletRequest request){
+        Object student = request.getSession().getAttribute("student");
+        if (student == null) {
+            throw new ServiceException("未登录");
+        }
+        questionService.save(question,(Student)student);
         return Result.success();
     }
 
