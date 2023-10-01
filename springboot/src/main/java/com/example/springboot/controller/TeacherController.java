@@ -1,14 +1,15 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.common.Result;
-import com.example.springboot.domain.Admin;
+import com.example.springboot.controller.request.ChatListPageRequest;
 import com.example.springboot.domain.Teacher;
+import com.example.springboot.model.dto.TeacherQuestion;
 import com.example.springboot.service.impl.TeacherServiceImpl;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -17,6 +18,18 @@ public class TeacherController {
 
     @Autowired
     private TeacherServiceImpl teacherService;
+
+    /**
+     * 显示聊天信息列表
+     * @param chatListPageRequest
+     * @return
+     */
+    @GetMapping("/chatPage")
+    public Result selectByPage(ChatListPageRequest chatListPageRequest){
+        PageInfo<TeacherQuestion> page = teacherService.page(chatListPageRequest);
+
+        return Result.success(page);
+    }
 
 
     /**

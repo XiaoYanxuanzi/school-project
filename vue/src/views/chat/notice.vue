@@ -9,21 +9,17 @@
       <el-button type="primary" plain @click="handleAdd">新增</el-button>
       <el-button type="danger" plain @click="delBatch">批量删除</el-button>
     </div>
-    <el-table :data="tableData" stripe :header-cell-style="{ backgroundColor: 'aliceblue', color: '#666' }" @selection-change="handleSelectionChange">
+    <el-table :data="tableData" stripe :header-cell-style="{ backgroundColor: 'aliceblue', color: '#666' }">
       <el-table-column type="selection" width="55" align="center"></el-table-column>
       <el-table-column prop="id" label="序号" width="70" align="center"></el-table-column>
       <el-table-column prop="title" label="标题"></el-table-column>
       <el-table-column prop="content" label="内容" show-overflow-tooltip></el-table-column>
-      <el-table-column prop="user" label="发布人"></el-table-column>
-      <el-table-column prop="time" label="发布时间"></el-table-column>
-      <el-table-column label="是否公开">
-        <template v-slot="scope">
-          <el-switch></el-switch>
-        </template>
-      </el-table-column>
+      <el-table-column prop="studentName" label="发送人"></el-table-column>
+      <el-table-column prop="sendTime" label="发布时间"></el-table-column>
+
       <el-table-column label="操作" align="center" width="180">
         <template v-slot="scope">
-          <el-button size="mini" type="primary" plain @click="handleEdit(scope.row)">编辑</el-button>
+          <el-button size="mini" type="primary" plain>回复</el-button>
           <el-button size="mini" type="danger" plain @click="del(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
@@ -60,14 +56,16 @@
 </template>
 
 <script>
+import request from "@/utils/request";
 
 export default {
+
   name: "Notice",
   data() {
     return {
       tableData: [],  // 所有的数据
       pageNum: 1,   // 当前的页码
-      pageSize: 5,  // 每页显示的个数
+      pageSize: 10,  // 每页显示的个数
       username: '',
       title: '',
       total: 0,
@@ -86,14 +84,17 @@ export default {
       content: '',
     }
   },
+
   created() {
     this.load()
   },
+
   methods: {
     handleAdd() {   // 新增数据
       this.form = {}  // 新增数据的时候清空数据
       this.fromVisible = true   // 打开弹窗
     },
+
     save() {   // 保存按钮触发的逻辑  它会触发新增或者更新
       this.$refs.formRef.validate((valid) => {
         if (valid) {
@@ -101,8 +102,42 @@ export default {
         }
       })
     },
+
     sendSaveRequest() {
 
+    },
+
+    handleCurrentChange(pageNum) {
+      // 点击分页按钮触发分页
+      this.params.pageNum = pageNum
+      this.load()
+    },
+
+    //重置
+    reset() {
+      this.params = {
+        pageNum: 1,
+        pageSize: 10,
+        title:''
+      }
+      this.load()
+    },
+
+    //分页查询
+    load() {
+      request.get('/teacher/chatPage', {
+        params: {
+          pageNum: this.pageNum,
+          pageSize: this.pageSize,
+          title: this.title
+        }
+      }).then(res => {
+        console.log(res)
+        if (res.code === '200') {
+          this.tableData = res.data.list
+          this.total = res.data.total
+        }
+      })
     },
   }
 }

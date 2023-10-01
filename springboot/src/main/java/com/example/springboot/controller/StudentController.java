@@ -6,7 +6,6 @@ import com.example.springboot.exception.ServiceException;
 import com.example.springboot.service.impl.QuestionServiceImpl;
 import com.example.springboot.service.impl.StudentServiceImpl;
 import com.example.springboot.service.impl.TeacherServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -31,7 +30,7 @@ public class StudentController {
 
 
     @PostMapping("/ask")
-    public Result askQuestion(@RequestBody Question question,HttpServletRequest request){
+    public Result askQuestion(@RequestBody Question question, HttpServletRequest request){
         Object student = request.getSession().getAttribute("student");
         if (student == null) {
             throw new ServiceException("未登录");

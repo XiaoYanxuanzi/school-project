@@ -46,23 +46,23 @@
         </el-radio-group>
         <el-menu :default-active="$route.path" router class="el-menu-vertical-demo" :collapse="isCollapse">
           <el-menu-item index="/">
-            <i class="el-i"></i>
+            <i class="el-icon-platform-eleme"></i>
             <span>首页</span>
           </el-menu-item>
 
           <el-menu-item index="/data">
-            <i class="el-i"></i>
+            <i class="el-icon-pie-chart"></i>
             <span>数据报表</span>
           </el-menu-item>
 
           <el-menu-item index="/chat" >
-            <i class="el-i"></i>
+            <i class="el-icon-chat-line-round"></i>
             <span>聊天信息</span>
           </el-menu-item>
 
           <el-submenu index="user">
             <template slot="title">
-              <i class="el-icon-hot-water"></i>
+              <i class="el-icon-user"></i>
               <span>学生管理</span>
             </template>
             <el-menu-item index="/addUser">学生添加</el-menu-item>
@@ -71,21 +71,24 @@
 
           <el-submenu index="role">
             <template slot="title">
-              <i class="el-icon-user"></i>
+              <i class="el-icon-s-custom"></i>
               <span>教师管理</span>
             </template>
             <el-menu-item index="/addRole">教师添加</el-menu-item>
             <el-menu-item index="/roleList">教师列表</el-menu-item>
           </el-submenu>
 
-          <el-submenu index="admin">
+          <el-submenu index="check">
             <template slot="title">
-              <i class="el-icon-user"></i>
-              <span>权限管理</span>
+              <i class="el-icon-date"></i>
+              <span>考勤记录</span>
             </template>
-            <el-menu-item index="/addAdmin">菜单管理</el-menu-item>
-            <el-menu-item index="/adminList">用户权限</el-menu-item>
+            <el-menu-item index="/addRole">查看学生</el-menu-item>
+            <el-menu-item index="/roleList">查看班级</el-menu-item>
+            <el-menu-item index="/addRole">查看年级</el-menu-item>
+            <el-menu-item index="/roleList">查看专业</el-menu-item>
           </el-submenu>
+
         </el-menu>
       </div>
 

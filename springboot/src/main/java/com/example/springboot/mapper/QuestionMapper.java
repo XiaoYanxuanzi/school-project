@@ -1,7 +1,11 @@
 package com.example.springboot.mapper;
 
+import com.example.springboot.controller.request.ChatListPageRequest;
 import com.example.springboot.domain.Question;
+import com.example.springboot.model.dto.TeacherQuestion;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
 * @author Administrator
@@ -13,6 +17,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface QuestionMapper {
 
     void save(Question question);
+
+    List<TeacherQuestion> listByCondition(ChatListPageRequest chatListPageRequest);
 }
 
 

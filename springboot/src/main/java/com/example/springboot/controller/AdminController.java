@@ -2,7 +2,6 @@ package com.example.springboot.controller;
 
 import com.example.springboot.common.Result;
 import com.example.springboot.domain.Admin;
-import com.example.springboot.domain.Student;
 import com.example.springboot.service.impl.AdminServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

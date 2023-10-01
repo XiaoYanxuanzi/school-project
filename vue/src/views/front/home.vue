@@ -30,7 +30,7 @@
     <el-dialog title="提问" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false">
       <el-form :model="form" label-width="80px" style="padding-right: 20px" :rules="rules" ref="formRef">
         <el-form-item label="接收人" prop="title">
-          <el-select v-model="value" placeholder="请选择老师">
+          <el-select v-model="teacherId" placeholder="请选择老师" @change="handleTeacherChange">
             <el-option
                 v-for="item in teacher"
                 :key="item.value"
@@ -66,8 +66,12 @@ export default {
   data() {
     return {
       teacher:[],
-      value: '',
-      form: {},
+      teacherId: null,
+      form: {
+        teacherId:null,
+        title: '',
+        content: ''
+      },
       user: JSON.parse(localStorage.getItem('roles') || '{}'),
       fromVisible:false,
       rules: {
@@ -114,17 +118,25 @@ export default {
         })
       },
 
-      //提交信息
-      question(){
-        request.post("/student/ask").then(res => {
-          console.log(res)
-          if (res.code === '200'){
-            this.$message.success("提问成功")
-          }else {
-            this.$message.error(res.msg)
-          }
-        })
-      }
+      handleTeacherChange(value) {
+        //value
+        console.log(value)
+        this.form.teacherId = value;
+      },
+
+        //提问
+        question(){
+          request.post("/student/ask",this.form).then(res => {
+            console.log(res)
+            if (res.code === '200'){
+              this.$message.success("提问成功")
+              // 清空表单
+              this.form = {}
+            }else {
+              this.$message.error(res.msg)
+            }
+          })
+        }
   }
 }
 </script>

@@ -3,8 +3,6 @@ package com.example.springboot.mapper;
 import com.example.springboot.domain.Student;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
-
 /**
 * @author Administrator
 * @description 针对表【student(学生表)】的数据库操作Mapper

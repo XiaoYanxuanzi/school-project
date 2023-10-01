@@ -1,11 +1,16 @@
 package com.example.springboot.service.impl;
 
+import com.example.springboot.controller.request.ChatListPageRequest;
+import com.example.springboot.domain.Question;
 import com.example.springboot.domain.Teacher;
 import com.example.springboot.exception.ServiceException;
 import com.example.springboot.mapper.AttendanceMapper;
+import com.example.springboot.mapper.QuestionMapper;
 import com.example.springboot.mapper.TeacherMapper;
+import com.example.springboot.model.dto.TeacherQuestion;
 import com.example.springboot.service.ITeacherService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,6 +25,9 @@ public class TeacherServiceImpl implements ITeacherService {
     @Resource
     private AttendanceMapper attendanceMapper;
 
+    @Resource
+    private QuestionMapper questionMapper;
+
 
     @Override
     public void updateAttendanceStatus(Long attendanceId, String newStatus) {
@@ -30,6 +38,13 @@ public class TeacherServiceImpl implements ITeacherService {
     public List<Teacher> getAllTeachersByNickname() {
         List<Teacher> allTeachers = teacherMapper.getAllTeachersByNickname();
         return allTeachers;
+    }
+
+    @Override
+    public PageInfo<TeacherQuestion> page(ChatListPageRequest chatListPageRequest) {
+        PageHelper.startPage(chatListPageRequest.getPageNum(), chatListPageRequest.getPageSize());
+        List<TeacherQuestion> questions = questionMapper.listByCondition(chatListPageRequest);
+        return new PageInfo<>(questions);
     }
 
     @Override

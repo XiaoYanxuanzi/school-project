@@ -1,7 +1,6 @@
 package com.example.springboot.domain;
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

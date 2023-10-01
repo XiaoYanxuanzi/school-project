@@ -1,19 +1,11 @@
 <template>
   <div>
-    <div style="color: #666;font-size: 14px;">
-      <div style="padding-bottom: 20px">
-        <b>您好！{{user.username}}</b>
-      </div>
-      <el-card>
-        欢迎使用本系统
-        <el-divider />
-        制作成员：陈明轩，黄玉瑶，林雪微，黄锦源，江小丹
-      </el-card>
+    <el-row>
+      <el-col :span="3" v-for="seat in 40">
+        <div class="seat"></div>
+      </el-col>
+    </el-row>
 
-    </div>
-    <el-card>
-      <div id="line" style="height: 455px"></div>
-    </el-card>
   </div>
 </template>
 
@@ -38,5 +30,12 @@ import * as echarts from 'echarts'
 </script>
 
 <style>
-
+.seat {
+  width: 100px;
+  height: 95px;
+  border: 1px solid #ccc;
+  text-align: center;
+  line-height: 100px;
+  margin-bottom: 20px;
+}
 </style>

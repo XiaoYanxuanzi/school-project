@@ -1,6 +1,5 @@
 package com.example.springboot.service.impl;
 
-import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import com.example.springboot.domain.Attendance;
 import com.example.springboot.domain.ClassSchedule;
@@ -14,9 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.sql.Time;
-import java.sql.Timestamp;
 import java.time.*;
-import java.util.Date;
 import java.util.List;
 
 @Service
