@@ -40,10 +40,10 @@
     <div style="display: flex">
       <!-- 侧边栏导航 -->
       <div style=" overflow: hidden; margin-right: 2px; background-color: white">
-        <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-          <el-radio-button :label="false">展开</el-radio-button>
-          <el-radio-button :label="true">收起</el-radio-button>
-        </el-radio-group>
+<!--        <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">-->
+<!--          <el-radio-button :label="false">展开</el-radio-button>-->
+<!--          <el-radio-button :label="true">收起</el-radio-button>-->
+<!--        </el-radio-group>-->
         <el-menu :default-active="$route.path" router class="el-menu-vertical-demo" :collapse="isCollapse">
           <el-menu-item index="/">
             <i class="el-icon-platform-eleme"></i>
@@ -88,8 +88,13 @@
             <el-menu-item index="/attendance3">查看年级</el-menu-item>
             <el-menu-item index="/attendance4">查看专业</el-menu-item>
           </el-submenu>
-
         </el-menu>
+
+        <div style="position: absolute; bottom: 40px; right: 40px; width: 60px; height: 60px; text-align: center; border-radius: 50%; background-color: #ffc839; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); transition: background-color 0.3s; display: flex; justify-content: center; align-items: center;">
+          <el-tooltip content="点击收缩(展开)" placement="top">
+            <el-button type="text" icon="el-icon-key" @click="toggleCollapse" style="font-size: 36px; color: #fff; text-align: center;"></el-button>
+          </el-tooltip>
+        </div>
       </div>
 
       <!-- 主体数据 -->
@@ -124,6 +129,10 @@ export default {
       })
     },
 
+    toggleCollapse() {
+      this.isCollapse = !this.isCollapse;
+    },
+
     password(){
       this.$router.push('/password')
     },
@@ -145,6 +154,7 @@ export default {
   cursor: pointer;
   color: #409EFF;
 }
+
 
 .el-icon-arrow-down {
   font-size: 12px;
