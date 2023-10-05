@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class StudentPageRequest extends BaseRequest{
-    private String nickname;
+    private String number;
     private String address;
     private String email;
 }

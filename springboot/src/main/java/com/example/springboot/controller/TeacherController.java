@@ -2,7 +2,10 @@ package com.example.springboot.controller;
 
 import com.example.springboot.common.Result;
 import com.example.springboot.controller.request.ChatListPageRequest;
+import com.example.springboot.controller.request.StudentPageRequest;
+import com.example.springboot.domain.Student;
 import com.example.springboot.domain.Teacher;
+import com.example.springboot.model.dto.StudentAndClass;
 import com.example.springboot.model.dto.TeacherQuestion;
 import com.example.springboot.service.impl.TeacherServiceImpl;
 import com.github.pagehelper.PageInfo;
@@ -19,14 +22,16 @@ public class TeacherController {
     @Autowired
     private TeacherServiceImpl teacherService;
 
+
     /**
      * 显示聊天信息列表
      * @param chatListPageRequest
      * @return
      */
     @GetMapping("/chatPage")
-    public Result selectByPage(ChatListPageRequest chatListPageRequest){
-        PageInfo<TeacherQuestion> page = teacherService.page(chatListPageRequest);
+    public Result selectByPage(ChatListPageRequest chatListPageRequest,HttpServletRequest request){
+        Object teacher = request.getSession().getAttribute("teacher");
+        PageInfo<TeacherQuestion> page = teacherService.pageQuestion(chatListPageRequest,(Teacher) teacher);
 
         return Result.success(page);
     }
@@ -54,7 +59,8 @@ public class TeacherController {
     public Result login(@RequestBody Teacher teacher, HttpServletRequest request){
         Teacher login = teacherService.login(teacher);
         request.getSession().setAttribute("teacher",login);
-        return Result.success();
+        System.out.println(login);
+        return Result.success(login);
     }
 
     /**

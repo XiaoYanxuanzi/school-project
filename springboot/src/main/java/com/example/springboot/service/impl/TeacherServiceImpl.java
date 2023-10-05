@@ -1,12 +1,18 @@
 package com.example.springboot.service.impl;
 
 import com.example.springboot.controller.request.ChatListPageRequest;
+import com.example.springboot.controller.request.StudentPageRequest;
+import com.example.springboot.controller.request.TeacherPageRequest;
 import com.example.springboot.domain.Question;
+import com.example.springboot.domain.Student;
 import com.example.springboot.domain.Teacher;
 import com.example.springboot.exception.ServiceException;
+import com.example.springboot.mapper.AdminMapper;
 import com.example.springboot.mapper.AttendanceMapper;
 import com.example.springboot.mapper.QuestionMapper;
 import com.example.springboot.mapper.TeacherMapper;
+import com.example.springboot.model.dto.StudentAndClass;
+import com.example.springboot.model.dto.TeacherAndClass;
 import com.example.springboot.model.dto.TeacherQuestion;
 import com.example.springboot.service.ITeacherService;
 import com.github.pagehelper.PageHelper;
@@ -28,6 +34,9 @@ public class TeacherServiceImpl implements ITeacherService {
     @Resource
     private QuestionMapper questionMapper;
 
+    @Resource
+    private AdminMapper adminMapper;
+
 
     @Override
     public void updateAttendanceStatus(Long attendanceId, String newStatus) {
@@ -41,10 +50,26 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
-    public PageInfo<TeacherQuestion> page(ChatListPageRequest chatListPageRequest) {
+    public PageInfo<TeacherQuestion> pageQuestion(ChatListPageRequest chatListPageRequest,Teacher teacher) {
         PageHelper.startPage(chatListPageRequest.getPageNum(), chatListPageRequest.getPageSize());
-        List<TeacherQuestion> questions = questionMapper.listByCondition(chatListPageRequest);
+        // 获取当前老师的ID
+        Integer teacherId = teacher.getId();
+        List<TeacherQuestion> questions = questionMapper.listByCondition(chatListPageRequest.getTitle(),teacherId);
         return new PageInfo<>(questions);
+    }
+
+    @Override
+    public PageInfo<StudentAndClass> pageStudent(StudentPageRequest studentPageRequest) {
+        PageHelper.startPage(studentPageRequest.getPageNum(), studentPageRequest.getPageSize());
+        List<StudentAndClass> students = adminMapper.listByStudent(studentPageRequest);
+        return new PageInfo<>(students);
+    }
+
+    @Override
+    public PageInfo<TeacherAndClass> pageTeacher(TeacherPageRequest teacherPageRequest) {
+        PageHelper.startPage(teacherPageRequest.getPageNum(), teacherPageRequest.getPageSize());
+        List<TeacherAndClass> teachers = adminMapper.listByTeacher(teacherPageRequest);
+        return new PageInfo<>(teachers);
     }
 
     @Override

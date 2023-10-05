@@ -1,14 +1,10 @@
-package com.example.springboot.domain;
+package com.example.springboot.model.dto;
 
-import java.io.Serializable;
 import lombok.Data;
 
-/**
- * 学生表
- * @TableName student
- */
 @Data
-public class Student implements Serializable {
+public class StudentAndClass {
+
     /**
      * id
      */
@@ -50,19 +46,19 @@ public class Student implements Serializable {
     private String age;
 
     /**
-     * 年龄 0男 1女
+     * 年龄
      */
     private String sex;
 
     /**
-     * 班级id
+     * 班级名称
      */
-    private Integer classId;
+    private String className;
 
     /**
-     * 专业id
+     * 专业名称
      */
-    private Integer majorId;
+    private String majorName;
 
     /**
      * 学号

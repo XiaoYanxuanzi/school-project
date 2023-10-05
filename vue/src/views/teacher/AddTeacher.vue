@@ -1,22 +1,17 @@
 <template>
   <div style="width: 80%">
-    <div style="margin-bottom: 30px">新增用户</div>
+    <el-page-header style="margin-bottom: 40px" content="新增教师">
+    </el-page-header>
     <el-form :inline="true" :model="form" :rules="rules" ref="ruleForm" label-width="100px">
-      <el-form-item label="姓名" prop="name">
+
+      <el-form-item label="用户名" prop="name">
+        <el-input v-model="form.username" placeholder="请输入用户名"></el-input>
+      </el-form-item>
+      <el-form-item label="密码" prop="name">
+        <el-input v-model="form.password" placeholder="请输入密码"></el-input>
+      </el-form-item>
+        <el-form-item label="姓名" prop="name">
         <el-input v-model="form.name" placeholder="请输入姓名"></el-input>
-      </el-form-item>
-      <el-form-item label="年龄" prop="age">
-        <el-input v-model="form.age" placeholder="请输入年龄"></el-input>
-      </el-form-item>
-      <el-form-item label="性别">
-        <el-radio v-model="form.sex"  label="男">男</el-radio>
-        <el-radio v-model="form.sex"  label="女">女</el-radio>
-      </el-form-item>
-      <el-form-item label="联系方式" prop="phone">
-        <el-input v-model="form.phone" placeholder="请输入联系方式"></el-input>
-      </el-form-item>
-      <el-form-item label="地址" prop="address">
-        <el-input v-model="form.address" placeholder="请输入地址"></el-input>
       </el-form-item>
     </el-form>
 
@@ -30,7 +25,7 @@
 import request from "@/utils/request";
 
 export default {
-  name: 'AddUser',
+  name: 'AddTeacher',
   data() {
     const checkAge = (rule, value, callback) => {
       if (!value) {

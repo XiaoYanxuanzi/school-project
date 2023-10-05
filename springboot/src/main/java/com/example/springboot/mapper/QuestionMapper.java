@@ -18,7 +18,7 @@ public interface QuestionMapper {
 
     void save(Question question);
 
-    List<TeacherQuestion> listByCondition(ChatListPageRequest chatListPageRequest);
+    List<TeacherQuestion> listByCondition(String title,Integer teacherId);
 }
 
 

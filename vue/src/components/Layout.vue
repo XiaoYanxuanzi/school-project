@@ -11,7 +11,7 @@
           <span class="el-dropdown-link" style="cursor: pointer">
              <div style="display: flex; align-items: center; cursor: default">
                 <img :src="user.avatarUrl || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" alt="" style="width: 40px; height: 40px; border-radius: 50%; margin: 0 5px">
-                {{user.username}}<i class="el-icon-arrow-down el-icon--right"></i>
+                {{user.nickname}}<i class="el-icon-arrow-down el-icon--right"></i>
               </div>
           </span>
           <el-dropdown-menu slot="dropdown" style="width: 100px; text-align: center">
@@ -65,8 +65,8 @@
               <i class="el-icon-user"></i>
               <span>学生管理</span>
             </template>
-            <el-menu-item index="/addUser">学生添加</el-menu-item>
-            <el-menu-item index="/userList">学生列表</el-menu-item>
+            <el-menu-item index="/addStudent">学生添加</el-menu-item>
+            <el-menu-item index="/studentList">学生列表</el-menu-item>
           </el-submenu>
 
           <el-submenu index="role">
@@ -74,8 +74,8 @@
               <i class="el-icon-s-custom"></i>
               <span>教师管理</span>
             </template>
-            <el-menu-item index="/addRole">教师添加</el-menu-item>
-            <el-menu-item index="/roleList">教师列表</el-menu-item>
+            <el-menu-item index="/addTeacher">教师添加</el-menu-item>
+            <el-menu-item index="/teacherList">教师列表</el-menu-item>
           </el-submenu>
 
           <el-submenu index="check">
@@ -83,10 +83,10 @@
               <i class="el-icon-date"></i>
               <span>考勤记录</span>
             </template>
-            <el-menu-item index="/addRole">查看学生</el-menu-item>
-            <el-menu-item index="/roleList">查看班级</el-menu-item>
-            <el-menu-item index="/addRole">查看年级</el-menu-item>
-            <el-menu-item index="/roleList">查看专业</el-menu-item>
+            <el-menu-item index="/attendance1">查看学生</el-menu-item>
+            <el-menu-item index="/attendance2">查看班级</el-menu-item>
+            <el-menu-item index="/attendance3">查看年级</el-menu-item>
+            <el-menu-item index="/attendance4">查看专业</el-menu-item>
           </el-submenu>
 
         </el-menu>
@@ -109,7 +109,7 @@ export default {
   name: "Layout.vue",
   data() {
     return {
-      user: JSON.parse(localStorage.getItem('student') || '{}'),
+      user: JSON.parse(localStorage.getItem('teacher') || '{}'),
       isCollapse: true
     }
   },
@@ -117,7 +117,7 @@ export default {
     logout(){
       request.post('/student/logout',this.user).then(res => {
         if (res.code === '200'){
-          localStorage.removeItem('student')  // 清除当前的token和用户数据
+          localStorage.removeItem('teacher')  // 清除当前的token和用户数据
           this.$router.push('/login')
           this.$message.success('退出成功')
         }

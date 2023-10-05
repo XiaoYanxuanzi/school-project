@@ -1,6 +1,7 @@
 <template>
   <div style="width: 80%">
-    <div style="margin-bottom: 30px">编辑用户</div>
+    <el-page-header style="margin-bottom: 40px" content="编辑信息">
+    </el-page-header>
     <el-form :inline="true" :model="form" label-width="100px">
       <el-form-item label="用户名">
         <el-input v-model="form.username" placeholder="请输入用户名"></el-input>
@@ -32,7 +33,7 @@
 import request from "@/utils/request";
 
 export default {
-  name: 'EditUser',
+  name: 'EditTeacher',
   data() {
     return {
       form: {}

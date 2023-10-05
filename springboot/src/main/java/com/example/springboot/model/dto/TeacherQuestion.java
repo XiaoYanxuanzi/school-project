@@ -3,7 +3,6 @@ package com.example.springboot.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-
 import java.util.Date;
 
 @Data
@@ -28,6 +27,11 @@ public class TeacherQuestion {
      * 学生姓名
      */
     private String studentName;
+
+    /**
+     * 教师姓名
+     */
+    private String teacherId;
 
     /**
      * 发送时间

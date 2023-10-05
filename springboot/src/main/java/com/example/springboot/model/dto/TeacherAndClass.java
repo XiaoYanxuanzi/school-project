@@ -1,16 +1,12 @@
-package com.example.springboot.domain;
+package com.example.springboot.model.dto;
 
-import java.io.Serializable;
 import lombok.Data;
 
-/**
- * 老师表
- * @TableName teacher
- */
 @Data
-public class Teacher implements Serializable {
+public class TeacherAndClass {
+
     /**
-     * 
+     *
      */
     private Integer id;
 
@@ -39,5 +35,11 @@ public class Teacher implements Serializable {
      */
     private Integer classId;
 
+    /**
+     * 班级名称
+     */
+    private String className;
+
     private static final long serialVersionUID = 1L;
+
 }

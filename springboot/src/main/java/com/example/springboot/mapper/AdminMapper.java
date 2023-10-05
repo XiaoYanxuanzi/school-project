@@ -1,7 +1,13 @@
 package com.example.springboot.mapper;
 
+import com.example.springboot.controller.request.StudentPageRequest;
+import com.example.springboot.controller.request.TeacherPageRequest;
 import com.example.springboot.domain.Admin;
+import com.example.springboot.model.dto.StudentAndClass;
+import com.example.springboot.model.dto.TeacherAndClass;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
 * @author Administrator
@@ -13,6 +19,10 @@ import org.apache.ibatis.annotations.Mapper;
 public interface AdminMapper {
 
     Admin selectUsername(Admin admin);
+
+    List<StudentAndClass> listByStudent(StudentPageRequest studentPageRequest);
+
+    List<TeacherAndClass> listByTeacher(TeacherPageRequest teacherPageRequest);
 }
 
 

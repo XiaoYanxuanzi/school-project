@@ -45,19 +45,34 @@ const routes = [
         component: () => import('@/views/chat/notice.vue'),
       },
       {
-        path: 'userList',
-        name: 'User',
-        component: () => import('@/views/user/User.vue'),
+        path: 'studentList',
+        name: 'Student',
+        component: () => import('@/views/student/student.vue'),
       },
       {
-        path: 'addUser',
-        name: 'AddUser',
-        component: () => import('@/views/user/AddUser.vue'),
+        path: 'addStudent',
+        name: 'AddStudent',
+        component: () => import('@/views/student/AddStudent.vue'),
       },
       {
-        path: 'editUser',
-        name: 'EditUser',
-        component: () => import('@/views/user/EditUser.vue'),
+        path: 'editStudent',
+        name: 'EditStudent',
+        component: () => import('@/views/student/EditStudent.vue'),
+      },
+      {
+        path: 'teacherList',
+        name: 'Teacher',
+        component: () => import('@/views/teacher/teacher.vue'),
+      },
+      {
+        path: 'addTeacher',
+        name: 'AddTeacher',
+        component: () => import('@/views/teacher/AddTeacher.vue'),
+      },
+      {
+        path: 'editTeacher',
+        name: 'EditTeacher',
+        component: () => import('@/views/teacher/EditTeacher.vue'),
       },
       {
         path: 'person',
@@ -69,7 +84,23 @@ const routes = [
         name: 'Password',
         component: () => import('@/views/home/Password.vue'),
       },
-
+      {
+        path: 'attendance1',
+        name: 'Student',
+        component: () => import('@/views/attendance/StudentAttendance'),
+      },{
+        path: 'attendance2',
+        name: 'Password',
+        component: () => import('@/views/attendance/ClassAttendance'),
+      },{
+        path: 'attendance3',
+        name: 'Password',
+        component: () => import('@/views/attendance/GradeAttendance'),
+      },{
+        path: 'attendance4',
+        name: 'Password',
+        component: () => import('@/views/attendance/MajorAttendance'),
+      },
     ]
   },
   {
@@ -85,8 +116,13 @@ const routes = [
       },
       {
         path: 'notice',
-        name: 'notice',
+        name: 'Notice',
         component: () => import('@/views/front/bar/notice.vue'),
+      },
+      {
+        path: 'person',
+        name: 'person',
+        component: () => import('@/views/front/bar/person'),
       },
     ]
   },

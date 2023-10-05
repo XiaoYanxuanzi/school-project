@@ -8,11 +8,11 @@
         <span style="margin-left: 25px; font-size: 24px">校园学生平台</span>
       </div>
       <!-- 头部区域 -->
-      <el-menu class="el-menu-demo" mode="horizontal" >
-        <el-menu-item index="/">首页</el-menu-item>
-        <el-menu-item index="/exam" disabled>在线考试</el-menu-item>
-        <el-menu-item index="/person">个人信息</el-menu-item>
-        <el-menu-item index="/notice">消息中心</el-menu-item>
+      <el-menu class="el-menu-demo" mode="horizontal" :default-active.sync="currentRoute" @select="handleSelect">
+        <el-menu-item index="/front/home">首页</el-menu-item>
+        <el-menu-item index="/front/exam" disabled>在线考试</el-menu-item>
+        <el-menu-item index="/front/person">个人信息</el-menu-item>
+        <el-menu-item index="/front/notice">消息中心</el-menu-item>
       </el-menu>
 
       <div style="flex: 1; text-align: right; padding-right: 20px">
@@ -60,8 +60,10 @@ export default {
   data() {
     return {
       user: JSON.parse(localStorage.getItem('student') || '{}'),
+      currentRoute: window.location.pathname, // 初始化为当前路由路径
     };
   },
+
   methods: {
     logout(){
       request.post('/student/logout',this.user).then(res => {
@@ -71,6 +73,15 @@ export default {
           this.$message.success('退出成功')
         }
       })
+    },
+    handleSelect(key,keyPath) {
+      console.log(key, keyPath);
+      // 更新当前路由
+      this.currentRoute = key;
+      window.location.href = key;
+    },
+    person(){
+      window.location.href = 'http://localhost:8080/front/person'
     },
   }
 }

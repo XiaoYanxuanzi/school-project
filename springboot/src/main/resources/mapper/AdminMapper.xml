@@ -7,4 +7,31 @@
     <select id="selectUsername" resultType="com.example.springboot.domain.Admin">
         select * from admin where username=#{username}
     </select>
+
+    <select id="listByStudent" resultType="com.example.springboot.model.dto.StudentAndClass">
+        select s.id,c.class_name as className,m.major_name as majorName,username, nickname, email, phone, address, age, sex, number from student s,class c,major m
+        where s.class_id = c.id
+        and s.major_id = m.id
+        <where>
+            <if test="number != null and number != ''">
+                name like concat('%', #{ number }, '%')
+            </if>
+            <if test="email != null and email != ''">
+                name like concat('%', #{ email }, '%')
+            </if>
+            <if test="address != null and address != ''">
+                name like concat('%', #{ address }, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="listByTeacher" resultType="com.example.springboot.model.dto.TeacherAndClass">
+        select t.id,c.class_name as className,username,password,nickname,role_id from teacher t,class c
+        where t.class_id = c.id
+        <where>
+            <if test="nickname != null and nickname!= ''">
+                name like concat('%', #{ nickname }, '%')
+            </if>
+        </where>
+    </select>
 </mapper>

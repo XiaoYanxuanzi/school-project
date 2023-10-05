@@ -7,6 +7,12 @@
       <div style="flex: 1; display: flex; align-items: center; justify-content: center">
         <el-form :model="user" :rules="rules" style="width: 80%" ref="loginRef">
           <div style="font-size: 20px; font-weight: bold; text-align: center; margin-bottom: 20px">课堂教学管理系统登录</div>
+
+          <el-tabs v-model="loginType">
+            <el-tab-pane label="我是学生" name="student"></el-tab-pane>
+            <el-tab-pane label="我是教师" name="teacher"></el-tab-pane>
+          </el-tabs>
+
           <el-form-item prop="username">
             <el-input prefix-icon="el-icon-user" size="medium" placeholder="请输入账号" v-model="user.username"></el-input>
           </el-form-item>
@@ -75,6 +81,7 @@ export default {
 
     return {
       code: '',  // 验证码组件传递过来的code
+      loginType: 'student', // 默认是学生登录
       user: {
         code: '',   // 表单里用户输入的code 验证码
         username: '',
@@ -105,20 +112,43 @@ export default {
     login() {
       this.$refs["loginRef"].validate((valid) => {
         if (valid) {
-          request.post('/student/login',this.user).then(res => {
-            // console.log('res.code:', res.code);
-            // console.log('res.data.role:', res.data.role);
-            if (res.code === '200'){
-              this.$router.push('/front/home')
-              this.$message.success('登录成功')
-              localStorage.setItem("student", JSON.stringify(res.data))  // 存储用户数据
-            }else {
-              this.$message.success(res.msg)
-            }
-          })
+          if (this.isStudent()) {
+            // 学生登录请求
+            request.post('/student/login', this.user).then(res => {
+              if (res.code === '200') {
+                this.$router.push('/front/home');
+                this.$message.success('学生登录成功');
+                localStorage.setItem("student", JSON.stringify(res.data)); // 存储用户数据
+              } else {
+                this.$message.error(res.msg);
+              }
+            });
+          } else if (this.isTeacher()) {
+            // 教师登录请求
+            request.post('/teacher/login', this.user).then(res => {
+              if (res.code === '200') {
+                // console.log("res=", res);
+                this.$router.push('/home');
+                // 获取当前时间
+                const currentTime = new Date().toLocaleString();
+                this.$message.success('欢迎您，'+res.data.nickname+'老师 —— 登录时间为：' + currentTime);
+                // 更新最近登录时间
+                res.data.lastLoginTime = currentTime;
+                localStorage.setItem("teacher", JSON.stringify(res.data)); // 存储用户数据
+              } else {
+                this.$message.error(res.msg);
+              }
+            });
+          }
         }
       });
-    }
+    },
+    isStudent() {
+      return this.loginType === 'student';
+    },
+    isTeacher() {
+      return this.loginType === 'teacher';
+    },
   }
 }
 </script>
