@@ -12,4 +12,11 @@ public interface IStudentService {
 
     void insert(Student student, Attendance attendance,ClassSchedule classSchedule);
 
+    Student save(Student student);
+
+    Student getById(Integer id);
+
+    void deleteById(Integer id);
+
+    void update(Student student);
 }

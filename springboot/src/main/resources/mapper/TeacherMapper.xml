@@ -12,8 +12,23 @@
         SELECT id,nickname FROM teacher where role_id = 0
     </select>
 
+    <select id="getAllClasses" resultType="com.example.springboot.model.dto.ClassDeskMessage">
+        SELECT DISTINCT s.id,s.nickname, s.number
+        FROM student s
+                 JOIN class c ON s.class_id = c.id
+                 JOIN teacher t ON c.id = t.class_id
+        WHERE s.class_id = t.class_id
+        ORDER BY s.number
+
+    </select>
+
     <insert id="insertTeacher">
         INSERT INTO teacher (username, nickname, password)
         VALUES (#{username},#{nickname},#{password})
+    </insert>
+
+    <insert id="save">
+        INSERT INTO teacher (username, password, role_id)
+        VALUES (#{username},#{password},#{roleId})
     </insert>
 </mapper>

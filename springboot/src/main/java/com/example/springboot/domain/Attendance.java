@@ -43,5 +43,19 @@ public class Attendance implements Serializable {
      */
     private String isAttended;
 
+    /**
+     * 迟到次数
+     */
+    private Integer lateNumber;
+
+    /**
+     * 缺席次数
+     */
+    private Integer absentNumber;
+
+    private int courseProgressId;
+
+    private CourseProgressPlan courseProgressPlan; // 添加对应的外键属性
+
     private static final long serialVersionUID = 1L;
 }

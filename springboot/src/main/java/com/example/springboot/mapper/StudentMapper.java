@@ -18,6 +18,14 @@ public interface StudentMapper {
     //注册学生账号
     void insertStudent(Student student);
 
+
+    void studentSave();
+
+    Student getById(Integer id);
+
+    void deleteById(Integer id);
+
+    void updateById();
 }
 
 

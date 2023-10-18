@@ -2,7 +2,9 @@ package com.example.springboot.mapper;
 
 import com.example.springboot.domain.Attendance;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -27,6 +29,10 @@ public interface AttendanceMapper {
 
     //根据id来修改状态（请假）
     void updateAttendance(Long attendanceId, String newStatus);
+
+    List<Attendance> getAttendanceWithCourseProgressPlan(int courseProgressId);
+
+    // ...
 }
 
 

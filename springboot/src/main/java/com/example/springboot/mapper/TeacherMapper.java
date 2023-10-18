@@ -1,6 +1,7 @@
 package com.example.springboot.mapper;
 
 import com.example.springboot.domain.Teacher;
+import com.example.springboot.model.dto.ClassDeskMessage;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,6 +20,10 @@ public interface TeacherMapper {
     Teacher selectUsername(Teacher teacher);
 
     void insertTeacher(Teacher teacher);
+
+    void save();
+
+    List<ClassDeskMessage> getAllClasses();
 }
 
 

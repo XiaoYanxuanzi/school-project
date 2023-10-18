@@ -28,7 +28,12 @@ public class StudentController {
     private TeacherServiceImpl teacherService;
 
 
-
+    /**
+     * 选择老师进行提问
+     * @param question
+     * @param request
+     * @return
+     */
     @PostMapping("/ask")
     public Result askQuestion(@RequestBody Question question, HttpServletRequest request){
         Object student = request.getSession().getAttribute("student");

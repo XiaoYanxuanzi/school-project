@@ -3,25 +3,75 @@ package com.example.springboot.controller;
 import com.example.springboot.common.Result;
 import com.example.springboot.controller.request.ChatListPageRequest;
 import com.example.springboot.controller.request.StudentPageRequest;
+import com.example.springboot.domain.Attendance;
 import com.example.springboot.domain.Student;
 import com.example.springboot.domain.Teacher;
+import com.example.springboot.model.dto.ClassDeskMessage;
 import com.example.springboot.model.dto.StudentAndClass;
 import com.example.springboot.model.dto.TeacherQuestion;
+import com.example.springboot.service.impl.AttendanceServiceImpl;
+import com.example.springboot.service.impl.StudentServiceImpl;
 import com.example.springboot.service.impl.TeacherServiceImpl;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.util.List;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/teacher")
 public class TeacherController {
 
-    @Autowired
+    @Resource
     private TeacherServiceImpl teacherService;
 
+    @Resource
+    private StudentServiceImpl studentService;
+
+    @Resource
+    private AttendanceServiceImpl attendanceService;
+
+    @GetMapping("/course-progress/{courseProgressId}")
+    public List<Attendance> getAttendanceWithCourseProgressPlan(@PathVariable int courseProgressId) {
+        return attendanceService.getAttendanceWithCourseProgressPlan(courseProgressId);
+    }
+
+
+    /**
+     * 根据id返回学生信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable Integer id) {
+        Student studentId = studentService.getById(id);
+        return Result.success(studentId);
+    }
+
+    /**
+     * 获取教师课堂信息
+     * @return
+     */
+    @GetMapping("/classes")
+    public List<ClassDeskMessage> getAllClasses() {
+        return teacherService.getAllClasses();
+    }
+
+    /**
+     * 新增教师信息
+     * @param teacher
+     * @return
+     */
+    @PostMapping("/save")
+    public Result save(@RequestBody Teacher teacher) {
+        teacherService.save(teacher);
+        return Result.success();
+    }
 
     /**
      * 显示聊天信息列表
@@ -35,7 +85,6 @@ public class TeacherController {
 
         return Result.success(page);
     }
-
 
     /**
      * 修改学生出席情况

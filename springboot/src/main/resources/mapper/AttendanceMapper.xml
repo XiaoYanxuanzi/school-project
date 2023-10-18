@@ -4,6 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.springboot.mapper.AttendanceMapper">
 
+    <resultMap id="AttendanceResultMap" type="com.example.springboot.domain.Attendance">
+        <id property="id" column="id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="attendance" column="attendance"/>
+        <result property="isAttended" column="is_attended"/>
+        <result property="attendanceDay" column="attendance_day"/>
+        <result property="attendanceTime" column="attendance_time"/>
+        <result property="lateNumber" column="late_number"/>
+        <result property="absentNumber" column="absent_number"/>
+        <result property="courseProgressId" column="course_progress_id"/>
+        <association property="courseProgressPlan" javaType="com.example.springboot.domain.CourseProgressPlan">
+            <id property="id" column="cpp.id"/>
+            <result property="coursePlanId" column="cpp.course_plan_id"/>
+            <result property="week" column="cpp.week"/>
+            <result property="dayOfWeek" column="cpp.day_of_week"/>
+            <result property="classScheduleId" column="cpp.class_schedule_id"/>
+        </association>
+    </resultMap>
+
+    <select id="getAttendanceWithCourseProgressPlan" resultMap="AttendanceResultMap">
+        SELECT a.*, cpp.week, cpp.day_of_week
+        FROM attendance a
+                 LEFT JOIN course_progress_plan cpp ON a.course_progress_id = cpp.id
+        WHERE a.course_progress_id = #{courseProgressId}
+    </select>
+
+
     <insert id="insert">
         INSERT INTO attendance (student_id, attendance, is_attended,attendance_day,attendance_time)
         VALUES (#{studentId},#{attendance},#{isAttended},#{attendanceDay},#{attendanceTime})
@@ -33,5 +60,9 @@
 
     <select id="findStudentIds" resultType="java.lang.Integer">
         SELECT student_id FROM attendance
+    </select>
+
+    <select id="findByAttendanceDayBetween" resultType="com.example.springboot.domain.Attendance">
+
     </select>
 </mapper>

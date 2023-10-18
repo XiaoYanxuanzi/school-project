@@ -13,10 +13,10 @@
         select q.id, s.nickname as studentName, teacher_id teacherId, q.title, q.content,q.send_time as sendTime from question q,  student s
         where q.student_id = s.id
         and q.teacher_id = #{teacherId}    <!-- 添加条件，只选择属于当前老师的提问 -->
-        <where>
+
             <if test="title != null and title != ''">
-                name like concat('%', #{ title }, '%')
+                and q.title like concat('%', #{ title }, '%')
             </if>
-        </where>
+
     </select>
 </mapper>

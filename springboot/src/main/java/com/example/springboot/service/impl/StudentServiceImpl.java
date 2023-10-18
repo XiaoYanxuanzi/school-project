@@ -57,6 +57,28 @@ public class StudentServiceImpl implements IStudentService {
         markAttendance(attendance, today, student.getId(), studentIds, currentTime);
     }
 
+    @Override
+    public Student save(Student student) {
+        studentMapper.studentSave();
+        student.setNickname(student.getUsername());
+        return student;
+    }
+
+    @Override
+    public Student getById(Integer id) {
+        return studentMapper.getById(id);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        studentMapper.deleteById(id);
+    }
+
+    @Override
+    public void update(Student student) {
+        studentMapper.updateById();
+    }
+
 
     @Override
     public Student login(Student student) {
@@ -104,6 +126,7 @@ public class StudentServiceImpl implements IStudentService {
                 Duration timeDifference = Duration.between(startTime, currentTime);
                 if (timeDifference.toMinutes() >= 5) {
                     attendance.setAttendance("迟到");
+                    attendance.setLateNumber(attendance.getLateNumber() + 1);
                 } else {
                     attendance.setAttendance("打卡");
                 }
@@ -124,6 +147,7 @@ public class StudentServiceImpl implements IStudentService {
         attendance.setAttendanceDay(today);
         attendance.setAttendance("缺席");
         attendance.setIsAttended("否");
+        attendance.setAbsentNumber(attendance.getAbsentNumber() + 1);
         attendanceMapper.updateAttendanceAttended(attendance);
     }
 

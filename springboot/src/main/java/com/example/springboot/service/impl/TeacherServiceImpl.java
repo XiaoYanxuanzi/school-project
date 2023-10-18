@@ -11,6 +11,7 @@ import com.example.springboot.mapper.AdminMapper;
 import com.example.springboot.mapper.AttendanceMapper;
 import com.example.springboot.mapper.QuestionMapper;
 import com.example.springboot.mapper.TeacherMapper;
+import com.example.springboot.model.dto.ClassDeskMessage;
 import com.example.springboot.model.dto.StudentAndClass;
 import com.example.springboot.model.dto.TeacherAndClass;
 import com.example.springboot.model.dto.TeacherQuestion;
@@ -71,6 +72,18 @@ public class TeacherServiceImpl implements ITeacherService {
         List<TeacherAndClass> teachers = adminMapper.listByTeacher(teacherPageRequest);
         return new PageInfo<>(teachers);
     }
+
+    @Override
+    public void save(Teacher teacher) {
+        teacherMapper.save();
+    }
+
+    @Override
+    public List<ClassDeskMessage> getAllClasses() {
+        List<ClassDeskMessage> allClasses = teacherMapper.getAllClasses();
+        return allClasses;
+    }
+
 
     @Override
     public Teacher login(Teacher teacher) {

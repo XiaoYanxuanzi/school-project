@@ -6,6 +6,7 @@ import com.example.springboot.controller.request.TeacherPageRequest;
 import com.example.springboot.domain.Question;
 import com.example.springboot.domain.Student;
 import com.example.springboot.domain.Teacher;
+import com.example.springboot.model.dto.ClassDeskMessage;
 import com.example.springboot.model.dto.StudentAndClass;
 import com.example.springboot.model.dto.TeacherAndClass;
 import com.example.springboot.model.dto.TeacherQuestion;
@@ -28,4 +29,8 @@ public interface ITeacherService {
     PageInfo<StudentAndClass> pageStudent(StudentPageRequest studentPageRequest);
 
     PageInfo<TeacherAndClass> pageTeacher(TeacherPageRequest teacherPageRequest);
+
+    void save(Teacher teacher);
+
+    List<ClassDeskMessage> getAllClasses();
 }
